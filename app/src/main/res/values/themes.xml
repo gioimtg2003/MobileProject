@@ -5,11 +5,11 @@
         <item name="colorPrimary" >@color/green_unique</item>
         <item name="colorSecondary">@color/green_unique</item>
         <item name="colorOnSurface">@color/white</item>
-        <item name="colorSecondaryContainer">#d9f5bc</item>
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
     </style>
+    <!--        custom theme cho indicator-->
     <style name="Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
-        <item name="android:backgroundTint">@color/green_unique</item>
+        <item name="android:color">@color/indicator_color</item>
     </style>
 
 </resources>
