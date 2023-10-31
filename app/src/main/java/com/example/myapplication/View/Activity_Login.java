@@ -30,6 +30,8 @@ public class Activity_Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_app);
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
         loginViewModel = new ViewModelProvider(this, new ViewModelProvider.AndroidViewModelFactory(getApplication())).get(LoginViewModel.class);
         mapping();
         checkSharedPrefs();

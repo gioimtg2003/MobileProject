@@ -6,16 +6,17 @@
         android:title="Home"
         android:enabled="true"
         android:icon="@drawable/home_icon"
-        app:showAsAction="ifRoom"
+
         />
     <item
         android:id="@+id/profile"
         android:title="Profile"
-        android:icon="@drawable/profile_icon"/>
+        android:icon="@drawable/profile_icon"
+        />
     <item
         android:id="@+id/cart"
         android:title=""
-        android:enabled="false"/>
+        />
     <item
         android:id="@+id/support"
         android:title="Support"
