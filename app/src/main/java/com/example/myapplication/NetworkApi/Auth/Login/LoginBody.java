@@ -1,4 +1,4 @@
-package com.example.myapplication.NetworkApi.Login;
+package com.example.myapplication.NetworkApi.Auth.Login;
 
 import com.google.gson.annotations.SerializedName;
 

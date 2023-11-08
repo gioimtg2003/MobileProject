@@ -1,8 +1,8 @@
-package com.example.myapplication.NetworkApi.Login;
+package com.example.myapplication.NetworkApi.Auth;
 
 import com.google.gson.annotations.SerializedName;
 
-public class LoginResponse {
+public class AuthResponse {
     @SerializedName("code")
     private int code;
     @SerializedName("message")

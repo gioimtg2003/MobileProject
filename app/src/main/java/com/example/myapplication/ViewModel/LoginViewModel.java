@@ -8,14 +8,11 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
-import com.example.myapplication.NetworkApi.Login.LoginBody;
-import com.example.myapplication.NetworkApi.Login.LoginResponse;
-import com.example.myapplication.Repository.MainRepository;
-import com.example.myapplication.View.Activity_Login;
-
-import java.io.Closeable;
+import com.example.myapplication.NetworkApi.Auth.IResponse;
+import com.example.myapplication.NetworkApi.Auth.Login.LoginBody;
+import com.example.myapplication.NetworkApi.Auth.AuthResponse;
+import com.example.myapplication.Repository.AuthRepository;
 
 public class LoginViewModel extends AndroidViewModel {
     private final String SHARED_PREFERENCES_NAME = "APP_STORAGE";
@@ -27,7 +24,7 @@ public class LoginViewModel extends AndroidViewModel {
     }
 
     private final MutableLiveData<String> mLoginMessage = new MutableLiveData<>();
-    MainRepository mainRepository;
+    AuthRepository mainRepository;
     public MutableLiveData<Integer> getmProgressBarData() {
         return mProgressBarData;
     }
@@ -38,9 +35,9 @@ public class LoginViewModel extends AndroidViewModel {
 
     public LoginViewModel(@NonNull Application application ){
         super(application);
-        mainRepository = new MainRepository();
+        mainRepository = new AuthRepository();
         mProgressBarData.postValue(View.GONE);
-        mLoginResult.postValue(false);
+        mLoginResult.setValue(false);
         mLoginMessage.postValue("");
     }
 
@@ -49,13 +46,13 @@ public class LoginViewModel extends AndroidViewModel {
      */
     public void login(String email, String password){
         mProgressBarData.postValue(View.VISIBLE);
-        mainRepository.login(new LoginBody(email, password), new MainRepository.LoginCallback() {
+        mainRepository.login(new LoginBody(email, password), new IResponse() {
             @Override
-            public void onResponse(LoginResponse loginResponse) {
+            public void onResponseAuth(AuthResponse loginResponse) {
                 if (loginResponse.getCode() == 200){
                     mProgressBarData.postValue(View.GONE);
-                    mLoginResult.postValue(true);
-                    mLoginMessage.postValue(loginResponse.getData().getName());
+                    mLoginResult.setValue(true);
+                    mLoginMessage.postValue("Đăng nhập thành công");
                     SharedPreferences sharedPreferences = getApplication().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("is_login", true);
@@ -68,15 +65,16 @@ public class LoginViewModel extends AndroidViewModel {
 
                 }else {
                     mProgressBarData.postValue(View.GONE);
-                    mLoginResult.postValue(false);
-                    mLoginMessage.postValue("Failed on: " + loginResponse.getMessage());
+                    mLoginResult.setValue(false);
+                    mLoginMessage.postValue("Đăng nhập thất bại");
                 }
             }
+
             @Override
             public void onFailure(Throwable t) {
                 mProgressBarData.postValue(View.GONE);
-                mLoginResult.postValue(false);
-                mLoginMessage.postValue("Faild on: " + t.getMessage());
+                mLoginResult.setValue(false);
+                mLoginMessage.postValue("Đăng nhập thất bại");
             }
         });
     }
