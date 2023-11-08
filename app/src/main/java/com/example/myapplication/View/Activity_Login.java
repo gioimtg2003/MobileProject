@@ -107,7 +107,9 @@ public class Activity_Login extends AppCompatActivity {
         loginViewModel.getmLoginMessage().observe(this, new Observer<String>() {
             @Override
             public void onChanged(String s) {
-                Toast.makeText(Activity_Login.this, s, Toast.LENGTH_SHORT).show();
+                if (!s.equals("")){
+                    Toast.makeText(Activity_Login.this, s, Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
