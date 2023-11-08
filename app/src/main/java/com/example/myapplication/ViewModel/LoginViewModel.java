@@ -52,7 +52,7 @@ public class LoginViewModel extends AndroidViewModel {
                 if (loginResponse.getCode() == 200){
                     mProgressBarData.postValue(View.GONE);
                     mLoginResult.setValue(true);
-                    mLoginMessage.postValue("Đăng nhập thành công");
+                    mLoginMessage.setValue("Đăng nhập thành công");
                     SharedPreferences sharedPreferences = getApplication().getSharedPreferences(SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putBoolean("is_login", true);
@@ -66,7 +66,7 @@ public class LoginViewModel extends AndroidViewModel {
                 }else {
                     mProgressBarData.postValue(View.GONE);
                     mLoginResult.setValue(false);
-                    mLoginMessage.postValue("Đăng nhập thất bại");
+                    mLoginMessage.setValue("Đăng nhập thất bại");
                 }
             }
 
@@ -74,7 +74,7 @@ public class LoginViewModel extends AndroidViewModel {
             public void onFailure(Throwable t) {
                 mProgressBarData.postValue(View.GONE);
                 mLoginResult.setValue(false);
-                mLoginMessage.postValue("Đăng nhập thất bại");
+                mLoginMessage.setValue("Đăng nhập thất bại");
             }
         });
     }
