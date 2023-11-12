@@ -40,52 +40,39 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btn = findViewById(R.id.button);
-        mAuth = FirebaseAuth.getInstance();
-        Button btn2 = findViewById(R.id.btnRegister);
-
-        // FirebaseAuth.getInstance().signOut();
-        oneTapClient = Identity.getSignInClient(this);
-        signInRequest = BeginSignInRequest.builder()
-                .setGoogleIdTokenRequestOptions(BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
-                        .setSupported(true)
-                        .setServerClientId(getString(R.string.default_web_client_id))
-                        .setFilterByAuthorizedAccounts(true)
-                        .build()
-                ).build();
-        GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-        client = GoogleSignIn.getClient(this, options);
-        btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = client.getSignInIntent();
-                startActivityForResult(intent, 200);
-            }
-        });
+//        mAuth = FirebaseAuth.getInstance();
+//        Button btn2 = findViewById(R.id.btnRegister);
+//
+//        // FirebaseAuth.getInstance().signOut();
+//        oneTapClient = Identity.getSignInClient(this);
+//        signInRequest = BeginSignInRequest.builder()
+//                .setGoogleIdTokenRequestOptions(BeginSignInRequest.GoogleIdTokenRequestOptions.builder()
+//                        .setSupported(true)
+//                        .setServerClientId(getString(R.string.default_web_client_id))
+//                        .setFilterByAuthorizedAccounts(true)
+//                        .build()
+//                ).build();
+//        GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestIdToken(getString(R.string.default_web_client_id))
+//                .requestEmail()
+//                .build();
+//        client = GoogleSignIn.getClient(this, options);
+//        btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Log.d("oke", "onClick: " + mAuth.getCurrentUser());
+//                Intent intent = client.getSignInIntent();
+//                startActivityForResult(intent, 200);
+//            }
+//        });
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser!=null){
-            Toast.makeText(this, "Already logged in", Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
-            case REQ_ONE_TAP:
+            case 200:
                 try {
 
                     SignInCredential credential = oneTapClient.getSignInCredentialFromIntent(data);
@@ -100,10 +87,11 @@ public class MainActivity extends AppCompatActivity {
                                             // Sign in success, update UI with the signed-in user's information
                                             Log.d("LOGIN_GOOGLE", "signInWithCredential:success");
                                             FirebaseUser user = mAuth.getCurrentUser();
+                                            Log.d("oke", "onComplete: " + user.getDisplayName()+ " "+ user.getEmail() + " " + user.getPhotoUrl() + " " + user.getUid());
 
                                         } else {
                                             // If sign in fails, display a message to the user.
-                                            Log.w("LOGIN_GOOGLE", "signInWithCredential:failure", task.getException());
+                                            Log.d("LOGIN_GOOGLE", "signInWithCredential:failure", task.getException());
 
                                         }
                                     }

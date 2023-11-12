@@ -45,7 +45,7 @@ public class AuthRepository {
             @Override
             public void onResponse(@NonNull Call<AuthResponse> call, @NonNull Response<AuthResponse> response) {
                 if (response.isSuccessful()){
-                    registerCallback.onResponseAuth(response.body());
+                     registerCallback.onResponseAuth(response.body());
 
                 }else {
                     registerCallback.onFailure(new Throwable(response.message()));

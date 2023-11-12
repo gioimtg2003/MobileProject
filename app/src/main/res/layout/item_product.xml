@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="200dp"
+    android:layout_width="match_parent"
     android:layout_height="200dp"
     android:layout_gravity="center"
-    android:layout_margin="5dp"
-    android:padding="10dp"
-    app:cardBackgroundColor="#FFFFFF"
+    android:layout_margin="7dp"
     app:cardCornerRadius="10dp"
     app:cardElevation="5dp">
 
@@ -17,10 +15,12 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="200dp"
-            android:layout_height="170dp"
+            android:layout_width="180dp"
+            android:layout_height="140dp"
             android:layout_gravity="center"
+            android:layout_marginTop="5sp"
             android:background="@drawable/category_garan"
+            android:backgroundTint="#FFFFFF"
             android:src="@drawable/category_garan" />
 
         <TextView

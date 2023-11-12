@@ -159,8 +159,8 @@ public class Activity_Login extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             case REQ_ONE_TAP:
+                Log.d("LOGIN_GOOGLE", "onActivityResult: " + requestCode);
                 try {
-
                     SignInCredential credential = oneTapClient.getSignInCredentialFromIntent(data);
                     String idToken = credential.getGoogleIdToken();
                     if (idToken !=  null) {
@@ -173,7 +173,7 @@ public class Activity_Login extends AppCompatActivity {
                                             // Sign in success, update UI with the signed-in user's information
                                             Log.d("LOGIN_GOOGLE", "signInWithCredential:success");
                                             FirebaseUser user = mAuth.getCurrentUser();
-
+                                            Log.d("LOGIN_GOOGLE", user.getUid() + " " + user.getDisplayName() + " " + user.getEmail());
                                         } else {
                                             // If sign in fails, display a message to the user.
                                             Log.w("LOGIN_GOOGLE", "signInWithCredential:failure", task.getException());

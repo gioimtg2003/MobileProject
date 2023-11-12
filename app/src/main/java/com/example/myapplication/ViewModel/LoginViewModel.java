@@ -44,7 +44,7 @@ public class LoginViewModel extends AndroidViewModel {
     /**
      * Hàm dùng để login
      */
-    public void login(String email, String password){
+    public void login(String email, String password) {
         mProgressBarData.postValue(View.VISIBLE);
         mainRepository.login(new LoginBody(email, password), new IResponse() {
             @Override
