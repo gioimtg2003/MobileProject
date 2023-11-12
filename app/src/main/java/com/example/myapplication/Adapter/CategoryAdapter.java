@@ -1,6 +1,5 @@
 package com.example.myapplication.Adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,8 +9,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.Model.Category;
+import com.example.myapplication.Model.Category.Category;
 import com.example.myapplication.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -34,10 +34,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder holder, int position) {
         Category category = mCategory.get(position);
-        if (category == null) {
-            return;
-        }
         holder.tvNameCategory.setText(category.getName());
+        Picasso.get()
+                .load(category.getImageUrl())
+                .error(R.drawable.category_garan)
+                .into(holder.imgCategory);
     }
 
     @Override
