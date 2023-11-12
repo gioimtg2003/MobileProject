@@ -1,6 +1,7 @@
 package com.example.myapplication.ViewModel;
 
 import android.app.Application;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -30,11 +31,12 @@ public class ProductViewModel extends AndroidViewModel {
     }
     public void addFavouriteProduct(int idProduct){
         productRepository.addFavouriteProduct(idProduct);
-        this.fetchDataSQLite(idProduct);
+
     }
     public void deleteFavouriteProduct(int idProduct){
         productRepository.deleteFavouriteProduct(idProduct);
-        this.fetchDataSQLite(idProduct);
+
+        Log.d("APPDATA", "deleteFavouriteProduct: " + String.valueOf(listProductMutableLiveData.getValue().size()));
     }
     public MutableLiveData<Boolean> getFavouriteProductMutableLiveData() {
         return favouriteProductMutableLiveData;

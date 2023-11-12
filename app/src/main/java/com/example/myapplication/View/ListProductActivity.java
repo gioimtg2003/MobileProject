@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.example.myapplication.Adapter.ProductAdapter;
@@ -25,6 +26,7 @@ public class ListProductActivity extends AppCompatActivity {
     private ImageView backPress;
     private int idCategory;
     private ProductViewModel productViewModel;
+    private GridLayoutManager gridLayoutManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +39,10 @@ public class ListProductActivity extends AppCompatActivity {
         this.backPress.setOnClickListener(v -> {
             finish();
         });
+        mProductAdapter = new ProductAdapter(productViewModel);
+        gridLayoutManager = new GridLayoutManager(ListProductActivity.this,2);
         setAdapter();
+
 
     }
     private void setAdapter(){
@@ -45,10 +50,10 @@ public class ListProductActivity extends AppCompatActivity {
         productViewModel.getListProductMutableLiveData().observe(this, new Observer<List<Product>>() {
             @Override
             public void onChanged(List<Product> products) {
-                mProductAdapter = new ProductAdapter(products, productViewModel);
-                GridLayoutManager gridLayoutManager = new GridLayoutManager(ListProductActivity.this,2);
-                rcvProduct.setLayoutManager(gridLayoutManager);
+                mProductAdapter.setProductList(products);
                 rcvProduct.setAdapter(mProductAdapter);
+                rcvProduct.setLayoutManager(gridLayoutManager);
+                Log.d("APPDATA", "onChanged: " + products.size());
             }
         });
 

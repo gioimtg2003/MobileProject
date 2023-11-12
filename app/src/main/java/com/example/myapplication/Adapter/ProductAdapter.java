@@ -19,11 +19,15 @@ import com.example.myapplication.ViewModel.ProductViewModel;
 import java.util.List;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
+    public void setProductList(List<Product> productList) {
+        this.productList = productList;
+        notifyDataSetChanged();
+    }
+
     private List<Product> productList;
     private ProductViewModel productViewModel;
 
-    public ProductAdapter(List<Product> productList, ProductViewModel productViewModel) {
-        this.productList = productList;
+    public ProductAdapter(ProductViewModel productViewModel) {
         this.productViewModel = productViewModel;
     }
 
@@ -37,7 +41,6 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product product = productList.get(position);
-        Log.d("APPDATA", product.getName() + " id " + String.valueOf(product.getIdCategory()) + " favourite: " + String.valueOf(product.getFavourite()));
         if (product == null) {
             return;
         }
@@ -49,11 +52,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.favorite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                productViewModel = new ViewModelProvider((ViewModelStoreOwner) v.getContext()).get(ProductViewModel.class);
                 if(product.getFavourite() == 1){
                     productViewModel.deleteFavouriteProduct(product.getId());
+                    productViewModel.fetchDataSQLite(product.getIdCategory());
                 }else{
                     productViewModel.addFavouriteProduct(product.getId());
+                    productViewModel.fetchDataSQLite(product.getIdCategory());
                 }
             }
         });
