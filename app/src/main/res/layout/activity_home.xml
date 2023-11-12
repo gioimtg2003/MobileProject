@@ -11,8 +11,9 @@
         android:id="@+id/frame_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:backgroundTint="#FFFFFF"
         android:clipToPadding="false"
-        android:paddingBottom="100dp">
+        android:paddingBottom="80dp">
 
     </FrameLayout>
 
@@ -22,6 +23,7 @@
         android:id="@+id/bottomAppBar"
         style="@style/Widget.MaterialComponents.BottomAppBar.PrimarySurface"
         android:layout_gravity="bottom"
+        app:hideOnScroll="true"
         android:background="@color/white"
         app:fabCradleMargin="10dp"
         app:fabAlignmentMode="center"
