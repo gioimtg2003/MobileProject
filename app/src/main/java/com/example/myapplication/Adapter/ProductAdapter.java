@@ -7,15 +7,15 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.myapplication.Model.Product;
+import com.example.myapplication.Model.Product.Product;
 import com.example.myapplication.R;
 
 import java.util.List;
 
-public class HomeProductAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
+public class ProductAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     private List<Product> productList;
 
-    public HomeProductAdapter(List<Product> productList) {
+    public ProductAdapter(List<Product> productList) {
         this.productList = productList;
     }
 
@@ -28,7 +28,6 @@ public class HomeProductAdapter extends RecyclerView.Adapter<CategoryAdapter.Vie
 
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder holder, int position) {
-
     }
 
     @Override
@@ -37,8 +36,10 @@ public class HomeProductAdapter extends RecyclerView.Adapter<CategoryAdapter.Vie
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+
         }
     }
 }
