@@ -1,26 +1,26 @@
 package com.example.myapplication.ViewModel.Home;
 
+import android.app.Application;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.example.myapplication.Model.Category;
-import com.example.myapplication.NetworkApi.Home.IResponse;
-import com.example.myapplication.NetworkApi.Home.ResponseCategory;
 import com.example.myapplication.Repository.DataRepository;
 
 import java.util.List;
 
-public class DataViewModel extends ViewModel {
+public class DataViewModel extends AndroidViewModel {
     private MutableLiveData<List<Category>> categoryMutableLiveData = new MutableLiveData<List<Category>>();
-    private Category category;
     private DataRepository dataRepository;
 
-    public DataViewModel() {
-        dataRepository = new DataRepository();
-
+    public DataViewModel(@NonNull Application application) {
+        super(application);
+        dataRepository = new DataRepository(application);
     }
+
 
     public MutableLiveData<List<Category>> getCategoryMutableLiveData() {
         return categoryMutableLiveData;
@@ -31,22 +31,14 @@ public class DataViewModel extends ViewModel {
     }
 
     public void getDataCategory(){
-        dataRepository.getData(new IResponse() {
+        dataRepository.handleData(new DataRepository.IListCategory() {
             @Override
-            public void onResponseGetData(ResponseCategory responseCategory) {
-                if(responseCategory.getCode() == 200){
-                    categoryMutableLiveData.postValue(responseCategory.getData());
-                    Log.d("HOME", "Lấy dữ lieệu oke");
-
+            public void getListCategory(List<Category> listCategory) {
+                categoryMutableLiveData.postValue(listCategory);
+                for(Category c : listCategory){
+                    Log.d("APPDATA", "id "+ String.valueOf(c.getId()) + c.getName() + " image: " + c.getImageUrl());
                 }
-                Log.d("HOME", String.valueOf(responseCategory.getCode()));
-            }
-
-            @Override
-            public void onFailure(Throwable t) {
-                Log.d("HOME",t.getMessage());
             }
         });
     }
-
 }
