@@ -23,11 +23,9 @@ import com.example.myapplication.Adapter.CategoryAdapter;
 import com.example.myapplication.Adapter.PhotoViewPagerAdapter;
 import com.example.myapplication.Adapter.ProductAdapter;
 import com.example.myapplication.Database.DatabaseProduct;
-import com.example.myapplication.Model.Category.Category;
-import com.example.myapplication.Model.Category.CategorySqlite;
+import com.example.myapplication.Model.Category;
 import com.example.myapplication.Model.Image;
-import com.example.myapplication.Model.Product.Product;
-import com.example.myapplication.Model.Product.ProductSqlite;
+import com.example.myapplication.Model.Product;
 import com.example.myapplication.R;
 import com.example.myapplication.ViewModel.Home.DataViewModel;
 
@@ -112,7 +110,7 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         Log.d("TAG","OnCreatedView: " + getActivity());
         dataViewModel = new ViewModelProvider(requireActivity()).get(DataViewModel.class);
-        databaseProduct = new DatabaseProduct(requireActivity(), "DatabaseProduct", null, 1);
+        databaseProduct = new DatabaseProduct(requireActivity());
         // Mapping
         categoryRecyclerView = view.findViewById(R.id.recycerViewCategory);
         productRecyclerView = view.findViewById(R.id.recycerViewFoodDelicious);
@@ -135,14 +133,14 @@ public class HomeFragment extends Fragment {
                 categoryList = categories;
                 databaseProduct.onUpgrade(databaseProduct.getWritableDatabase(), 1, 2);
                 for (Category category : categories){
-                    databaseProduct.AddCategory(new CategorySqlite(category.get_id(), category.getName(), category.getImageUrl()));
+                    databaseProduct.AddCategory(new Category(category.get_id(), category.getName(), category.getImageUrl()));
                     for(Product product : category.getProducts()){
-                        databaseProduct.addProduct(new ProductSqlite(product.get_Id(), product.getName(), product.getPrice(), product.getQuantity(), product.getImageUrl(), product.getDescription(), product.getCategory()));
+                        databaseProduct.addProduct(new Product(product.get_id(), product.getName(), product.getPrice(), product.getQuantity(), product.getImageUrl(), product.getDescription(), product.getCategory()));
                     }
                 }
-                Log.d("HOME", "LIST: " + String.valueOf(categoryList.size()));
-                for (ProductSqlite product : databaseProduct.getAllProduct()){
-                    Log.d("HOME", "Tên sản phẩm: " + (product.toString()));
+                Log.d("APP", "LIST: " + String.valueOf(categoryList.size()));
+                for (Product product : databaseProduct.getAllProduct()){
+                    Log.d("APP", "Tên sản phẩm: " + (product.toString()));
                 }
                 categoryRecyclerView.setAdapter(new CategoryAdapter(categoryList));
             }

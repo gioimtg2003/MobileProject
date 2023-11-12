@@ -5,7 +5,7 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.myapplication.Model.Category.Category;
+import com.example.myapplication.Model.Category;
 import com.example.myapplication.NetworkApi.Home.IResponse;
 import com.example.myapplication.NetworkApi.Home.ResponseCategory;
 import com.example.myapplication.Repository.DataRepository;

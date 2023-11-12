@@ -1,6 +1,6 @@
 package com.example.myapplication.NetworkApi.Home;
 
-import com.example.myapplication.Model.Category.Category;
+import com.example.myapplication.Model.Category;
 
 import java.util.List;
 

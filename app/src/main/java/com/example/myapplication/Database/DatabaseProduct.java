@@ -7,8 +7,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
 
-import com.example.myapplication.Model.Category.CategorySqlite;
-import com.example.myapplication.Model.Product.ProductSqlite;
+import com.example.myapplication.Model.Category;
+import com.example.myapplication.Model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +17,14 @@ public class DatabaseProduct extends SQLiteOpenHelper {
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "DatabaseProduct";
 
-    public DatabaseProduct(@Nullable Context context, @Nullable String name, @Nullable SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, DATABASE_NAME, null, version);
+    public DatabaseProduct(@Nullable Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    /**
+     * Create table product, category, favouriteProduct, cartProduct.
+     * @param db The database.
+     */
     @Override
     public void onCreate(SQLiteDatabase db) {
         String sql = "CREATE TABLE IF NOT EXISTS product (id INTEGER PRIMARY KEY AUTOINCREMENT, _id TEXT, name TEXT, price INTEGER, quantity INTEGER, imageUrl TEXT, description TEXT, category TEXT)";
@@ -58,7 +62,12 @@ public class DatabaseProduct extends SQLiteOpenHelper {
         db.close();
         return productList;
     }
-    public void AddCategory(CategorySqlite category){
+
+    /**
+     * Add category to database.
+     * @param category
+     */
+    public void AddCategory(Category category){
         String sql = "INSERT INTO category (name, image) VALUES ('Đồ ăn', 'https://cdn.icon-icons.com/icons2/2699/PNG/512/food_plate_dish_icon_168935.png')";
         SQLiteDatabase db = getWritableDatabase();
         // db.execSQL(sql);
@@ -69,10 +78,15 @@ public class DatabaseProduct extends SQLiteOpenHelper {
         db.insert("category", null, values);
         db.close();
     }
-    public void addProduct(ProductSqlite product){
+
+    /**
+     * Add product to database.
+     * @param product
+     */
+    public void addProduct(Product product){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("_id", product.get_Id());
+        values.put("_id", product.get_id());
         values.put("name", product.getName());
         values.put("price", product.getPrice());
         values.put("quantity", product.getQuantity());
@@ -82,14 +96,19 @@ public class DatabaseProduct extends SQLiteOpenHelper {
         db.insert("product", null, values);
         db.close();
     }
-    public List<ProductSqlite> getAllProduct(){
-        List<ProductSqlite> productList = new ArrayList<ProductSqlite>();
+
+    /**
+     * Get all product from database.
+     * @return
+     */
+    public List<Product> getAllProduct(){
+        List<Product> productList = new ArrayList<Product>();
         String sql = "SELECT * FROM product";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
-            ProductSqlite product = new ProductSqlite(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getString(5), cursor.getString(6), cursor.getString(7));
+            Product product = new Product(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getString(5), cursor.getString(6), cursor.getString(7));
             productList.add(product);
             cursor.moveToNext();
         }
@@ -97,14 +116,14 @@ public class DatabaseProduct extends SQLiteOpenHelper {
         db.close();
         return productList;
     }
-    public List<CategorySqlite> getAllCategory(){
-        List<CategorySqlite> categoryList = new ArrayList<CategorySqlite>();
+    public List<Category> getAllCategory(){
+        List<Category> categoryList = new ArrayList<Category>();
         String sql = "SELECT * FROM category";
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
-            CategorySqlite category = new CategorySqlite(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), null);
+            Category category = new Category(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3));
             categoryList.add(category);
             cursor.moveToNext();
         }
