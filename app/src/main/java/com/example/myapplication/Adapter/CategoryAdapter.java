@@ -1,5 +1,6 @@
 package com.example.myapplication.Adapter;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Model.Category;
 import com.example.myapplication.R;
+import com.example.myapplication.View.ListProductActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -39,6 +41,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 .load(category.getImageUrl())
                 .error(R.drawable.category_garan)
                 .into(holder.imgCategory);
+        holder.imgCategory.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // put bundle
+                Intent intent = new Intent(v.getContext(), ListProductActivity.class);
+                intent.putExtra("idCategory", category.getId());
+                v.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

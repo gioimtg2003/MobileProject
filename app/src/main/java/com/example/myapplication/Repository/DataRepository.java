@@ -28,8 +28,6 @@ public class DataRepository
 {
     private SharedPreferences sharedPreferences;
     private SharedPreferences.Editor editor;
-    private String versionLocal;
-    private String versionServer;
     private DatabaseProduct databaseProduct;
     private final Context context;
     public DataRepository(Application application) {

@@ -3,6 +3,8 @@ package com.example.myapplication.Adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -28,6 +30,10 @@ public class ProductAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHol
 
     @Override
     public void onBindViewHolder(@NonNull CategoryAdapter.ViewHolder holder, int position) {
+        Product product = productList.get(position);
+        if (product == null) {
+            return;
+        }
     }
 
     @Override
@@ -36,10 +42,16 @@ public class ProductAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHol
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-
+        private ImageView favorite;
+        private ImageView imgUser;
+        private TextView tvName;
+        private TextView tvPrice;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
+            imgUser=itemView.findViewById(R.id.img_user);
+            tvName=itemView.findViewById(R.id.tv_name);
+            tvPrice=itemView.findViewById(R.id.tv_price);
+            favorite = itemView.findViewById(R.id.favourite);
         }
     }
 }
