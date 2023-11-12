@@ -131,17 +131,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(List<Category> categories) {
                 categoryList = categories;
-                databaseProduct.onUpgrade(databaseProduct.getWritableDatabase(), 1, 2);
-                for (Category category : categories){
-                    databaseProduct.AddCategory(new Category(category.get_id(), category.getName(), category.getImageUrl()));
-                    for(Product product : category.getProducts()){
-                        databaseProduct.addProduct(new Product(product.get_id(), product.getName(), product.getPrice(), product.getQuantity(), product.getImageUrl(), product.getDescription(), product.getCategory()));
-                    }
-                }
-                Log.d("APP", "LIST: " + String.valueOf(categoryList.size()));
-                for (Product product : databaseProduct.getAllProduct()){
-                    Log.d("APP", "Tên sản phẩm: " + (product.toString()));
-                }
+
                 categoryRecyclerView.setAdapter(new CategoryAdapter(categoryList));
             }
         });

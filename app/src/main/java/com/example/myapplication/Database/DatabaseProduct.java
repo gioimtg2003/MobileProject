@@ -27,7 +27,7 @@ public class DatabaseProduct extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE IF NOT EXISTS product (id INTEGER PRIMARY KEY AUTOINCREMENT, _id TEXT, name TEXT, price INTEGER, quantity INTEGER, imageUrl TEXT, description TEXT, category TEXT)";
+        String sql = "CREATE TABLE IF NOT EXISTS product (id INTEGER PRIMARY KEY AUTOINCREMENT, _id TEXT, name TEXT, price INTEGER, quantity INTEGER, imageUrl TEXT, description TEXT, category TEXT, idCategory INTEGER)";
         db.execSQL(sql);
         String sql1 = "CREATE TABLE IF NOT EXISTS category (id INTEGER PRIMARY KEY AUTOINCREMENT, _id TEXT, name TEXT, imageUrl TEXT)";
         db.execSQL(sql1);
@@ -67,7 +67,7 @@ public class DatabaseProduct extends SQLiteOpenHelper {
      * Add category to database.
      * @param category
      */
-    public void AddCategory(Category category){
+    public void addCategory(Category category){
         String sql = "INSERT INTO category (name, image) VALUES ('Đồ ăn', 'https://cdn.icon-icons.com/icons2/2699/PNG/512/food_plate_dish_icon_168935.png')";
         SQLiteDatabase db = getWritableDatabase();
         // db.execSQL(sql);
@@ -93,6 +93,7 @@ public class DatabaseProduct extends SQLiteOpenHelper {
         values.put("imageUrl", product.getImageUrl());
         values.put("description", product.getDescription());
         values.put("category", product.getCategory());
+        values.put("idCategory", product.getIdCategory());
         db.insert("product", null, values);
         db.close();
     }

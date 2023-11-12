@@ -9,6 +9,18 @@ public class Product {
     private String description;
     private String imageUrl;
     private String category;
+    private int idCategory;
+
+    public Product(String _id, String name, int price, int quantity, String description, String imageUrl, String category, int idCategory) {
+        this._id = _id;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.description = description;
+        this.imageUrl = imageUrl;
+        this.category = category;
+        this.idCategory = idCategory;
+    }
 
     public Product(String _id, String name, int price, int quantity, String description, String imageUrl, String category) {
         this._id = _id;
@@ -93,5 +105,12 @@ public class Product {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+    public int getIdCategory() {
+        return idCategory;
+    }
+
+    public void setIdCategory(int idCategory) {
+        this.idCategory = idCategory;
     }
 }
