@@ -10,6 +10,20 @@ public class Product {
     private String imageUrl;
     private String category;
     private int idCategory;
+    private int favourite;
+
+    public Product(int id, String _id, String name, int price, int quantity, String description, String imageUrl, String category, int idCategory, int favourite) {
+        this.id = id;
+        this._id = _id;
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
+        this.description = description;
+        this.imageUrl = imageUrl;
+        this.category = category;
+        this.idCategory = idCategory;
+        this.favourite = favourite;
+    }
 
     public Product(String _id, String name, int price, int quantity, String description, String imageUrl, String category, int idCategory) {
         this._id = _id;
@@ -112,5 +126,13 @@ public class Product {
 
     public void setIdCategory(int idCategory) {
         this.idCategory = idCategory;
+    }
+
+    public int getFavourite() {
+        return favourite;
+    }
+
+    public void setFavourite(int favourite) {
+        this.favourite = favourite;
     }
 }

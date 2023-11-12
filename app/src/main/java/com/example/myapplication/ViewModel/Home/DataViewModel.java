@@ -8,6 +8,7 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.myapplication.Model.Category;
+import com.example.myapplication.Model.Product;
 import com.example.myapplication.Repository.DataRepository;
 
 import java.util.List;
@@ -35,9 +36,6 @@ public class DataViewModel extends AndroidViewModel {
             @Override
             public void getListCategory(List<Category> listCategory) {
                 categoryMutableLiveData.postValue(listCategory);
-                for(Category c : listCategory){
-                    Log.d("APPDATA", "id "+ String.valueOf(c.getId()) + c.getName() + " image: " + c.getImageUrl());
-                }
             }
         });
     }

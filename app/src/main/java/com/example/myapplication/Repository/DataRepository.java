@@ -75,9 +75,7 @@ public class DataRepository
                     if(newVersion.equals(oldVersion)){
                         Log.d("APPDATA", "Check version oke: " + response.body().getVersion());
                         iListCategory.getListCategory(databaseProduct.getAllCategory());
-                        for (Product p : databaseProduct.getAllProduct()){
-                            Log.d("APPDATA", p.getName() + " " + String.valueOf(p.getIdCategory()));
-                        }
+
                     }else {
                         Log.d("APPDATA", "Dữ liệu cũ" + oldVersion + " dữ liệu mới: " + newVersion);
                         databaseProduct.onUpgrade(databaseProduct.getWritableDatabase(), 1, 2);
@@ -91,7 +89,7 @@ public class DataRepository
                                         Category category = responseCategory.getData().get(i);
                                         databaseProduct.addCategory(new Category(category.get_id(), category.getName(), category.getImageUrl()));
                                         for(Product product : responseCategory.getData().get(i).getProducts()){
-                                            databaseProduct.addProduct(new Product(product.get_id(), product.getName(), product.getPrice(), product.getQuantity(), product.getImageUrl(), product.getDescription(), product.getCategory(), i + 1));
+                                            databaseProduct.addProduct(new Product(product.get_id(), product.getName(), product.getPrice(), product.getQuantity(), product.getImageUrl(), product.getDescription(), product.getCategory(), (i + 1)));
                                         }
                                     }
                                     iListCategory.getListCategory(databaseProduct.getAllCategory());

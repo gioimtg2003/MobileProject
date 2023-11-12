@@ -46,6 +46,7 @@ public class HomeFragment extends Fragment {
     private List<Image> mListPhoto;
     private DatabaseProduct databaseProduct;
     private Handler mHandler = new Handler();
+
     private Runnable mRunnable = new Runnable() {
         @Override
         public void run() {
@@ -54,47 +55,8 @@ public class HomeFragment extends Fragment {
             } else {
                 mViewPager.setCurrentItem( mViewPager.getCurrentItem() + 1 );
             }
-
         }
     };
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        Log.d("TAG","onAttach: " + getActivity());
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        Log.d("TAG","onCreate: " + getActivity());
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        Log.d("TAG","OnStart: " + getActivity());
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        Log.d("TAG","OnStop: " + getActivity());
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        Log.d("TAG","OnDestroy: " + getActivity());
-
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        Log.d("TAG","OnResume: " + getActivity());
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -121,7 +83,9 @@ public class HomeFragment extends Fragment {
         setDataCategory();
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
         productRecyclerView.setLayoutManager(gridLayoutManager);
-        productRecyclerView.setAdapter(new ProductAdapter(setDataProduct()));
+
+
+
     }
     private void setDataCategory(){
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false);
@@ -131,15 +95,15 @@ public class HomeFragment extends Fragment {
             @Override
             public void onChanged(List<Category> categories) {
                 categoryList = categories;
-
                 categoryRecyclerView.setAdapter(new CategoryAdapter(categoryList));
+                for (Category category : categoryList){
+                    List<Product> productList = databaseProduct.getProductByCategory(category.getId());
+                    for (Product product : productList){
+                        Log.d("APPDATA", "id: " + product.getId() + " name: " + product.getName() + " price: " + product.getPrice() + " category: " + product.getIdCategory() + " favorite: " + product.getFavourite());
+                    }
+                }
             }
         });
-    }
-    private List<Product> setDataProduct() {
-        List<Product> productList = new ArrayList<>();
-
-        return productList;
     }
     private List<Image> setListProduct(){
         List<Image> list = new ArrayList<>();

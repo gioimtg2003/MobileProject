@@ -5,6 +5,8 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
+
 import androidx.annotation.Nullable;
 
 import com.example.myapplication.Model.Category;
@@ -27,26 +29,26 @@ public class DatabaseProduct extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE IF NOT EXISTS product (id INTEGER PRIMARY KEY AUTOINCREMENT, _id TEXT, name TEXT, price INTEGER, quantity INTEGER, imageUrl TEXT, description TEXT, category TEXT, idCategory INTEGER)";
+        String sql = "CREATE TABLE IF NOT EXISTS product (id INTEGER PRIMARY KEY AUTOINCREMENT, _id TEXT, name TEXT, price INTEGER, quantity INTEGER, imageUrl TEXT, description TEXT, category TEXT, idCategory INTEGER, favourite INTEGER DEFAULT 0)";
         db.execSQL(sql);
         String sql1 = "CREATE TABLE IF NOT EXISTS category (id INTEGER PRIMARY KEY AUTOINCREMENT, _id TEXT, name TEXT, imageUrl TEXT)";
         db.execSQL(sql1);
-        String sql2 = "CREATE TABLE IF NOT EXISTS favouriteProduct (id INTEGER PRIMARY KEY AUTOINCREMENT, idProduct INTEGER)";
-        db.execSQL(sql2);
         String sql3 = "CREATE TABLE IF NOT EXISTS cartProduct (id INTEGER PRIMARY KEY AUTOINCREMENT, idProduct INTEGER, quantity INTEGER)";
         db.execSQL(sql3);
     }
     public void AddFavouriteProduct(int idProduct){
+        String  sql = "UPDATE product SET favourite = 1 WHERE id = " + idProduct;
         SQLiteDatabase db = getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put("idProduct", idProduct);
-        db.insert("favouriteProduct", null, values);
-        db.close();
+        db.execSQL(sql);
+
+
+        Log.d("APPDATA", "Add favourite product: " + String.valueOf(idProduct));
     }
     public void DeleteFavouriteProduct(int idProduct){
         SQLiteDatabase db = getWritableDatabase();
-        db.delete("favouriteProduct", "idProduct = ?", new String[]{String.valueOf(idProduct)});
-        db.close();
+        ContentValues values = new ContentValues();
+        values.put("favourite", 0);
+        db.update("product", values, "id = ?", new String[]{String.valueOf(idProduct)});
     }
     public List<Integer> getAllFavouriteProduct(){
         List<Integer> productList = new ArrayList<Integer>();
@@ -109,7 +111,7 @@ public class DatabaseProduct extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(sql, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
-            Product product = new Product(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getString(5), cursor.getString(6), cursor.getString(7));
+            Product product = new Product(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getInt(8), cursor.getInt(9));
             productList.add(product);
             cursor.moveToNext();
         }
@@ -140,6 +142,22 @@ public class DatabaseProduct extends SQLiteOpenHelper {
             return true;
         }
         return false;
+    }
+    public List<Product> getProductByCategory(int idCategory){
+        Log.d("APPDATA", "idCategory: " + String.valueOf(idCategory));
+        List<Product> productList = new ArrayList<Product>();
+        String sql = "SELECT * FROM product WHERE idCategory = " + idCategory;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(sql, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            Product product = new Product(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getInt(4), cursor.getString(5), cursor.getString(6), cursor.getString(7), cursor.getInt(8), cursor.getInt(9));
+            productList.add(product);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        db.close();
+        return productList;
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
