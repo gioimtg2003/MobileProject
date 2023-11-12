@@ -17,6 +17,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
+import com.example.myapplication.View.Fragment.FavouriteFagment;
 import com.example.myapplication.View.Fragment.HomeFragment;
 import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.bottomappbar.BottomAppBarTopEdgeTreatment;
@@ -40,7 +41,6 @@ public class HomeActivity extends AppCompatActivity {
         frameLayout = findViewById(R.id.frame_layout);
         fragmentManager = getSupportFragmentManager();
         ReplaceFragment(new HomeFragment());
-
         floatingActionButton.setOnClickListener(v -> {
             Toast.makeText(this, "Click", Toast.LENGTH_SHORT).show();
         });
@@ -59,6 +59,8 @@ public class HomeActivity extends AppCompatActivity {
                 int i = item.getItemId();
                 if (i == R.id.home_fragment){
                     ReplaceFragment(new HomeFragment());
+                } else if (i == R.id.favourite_fagment) {
+                    ReplaceFragment(new FavouriteFagment());
                 }
                 return true;
             }
@@ -69,7 +71,6 @@ public class HomeActivity extends AppCompatActivity {
     private void ReplaceFragment(Fragment fragment){
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);
-
         fragmentTransaction.commit();
     }
 }

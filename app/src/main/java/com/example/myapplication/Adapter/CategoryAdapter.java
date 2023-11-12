@@ -47,6 +47,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 // put bundle
                 Intent intent = new Intent(v.getContext(), ListProductActivity.class);
                 intent.putExtra("idCategory", category.getId());
+                intent.putExtra("nameCategory", category.getName());
                 v.getContext().startActivity(intent);
             }
         });
