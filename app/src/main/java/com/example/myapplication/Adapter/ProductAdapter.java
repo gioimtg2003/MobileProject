@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.myapplication.Model.Product;
 import com.example.myapplication.R;
 import com.example.myapplication.ViewModel.ProductViewModel;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -26,9 +27,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     private List<Product> productList;
     private ProductViewModel productViewModel;
+    private final byte favourite;
 
-    public ProductAdapter(ProductViewModel productViewModel) {
+    public ProductAdapter(ProductViewModel productViewModel, byte favourite) {
         this.productViewModel = productViewModel;
+        this.favourite = favourite;
     }
 
     @NonNull
@@ -54,13 +57,23 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             public void onClick(View v) {
                 if(product.getFavourite() == 1){
                     productViewModel.deleteFavouriteProduct(product.getId());
-                    productViewModel.fetchDataSQLite(product.getIdCategory());
+                    if (favourite == 1)
+                        productViewModel.fetchDataProductFavourite();
+                    else
+                        productViewModel.fetchDataSQLite(product.getIdCategory());
+
                 }else{
                     productViewModel.addFavouriteProduct(product.getId());
-                    productViewModel.fetchDataSQLite(product.getIdCategory());
+                    if (favourite == 1)
+                        productViewModel.fetchDataProductFavourite();
+                    else
+                        productViewModel.fetchDataSQLite(product.getIdCategory());
                 }
             }
         });
+        holder.tvName.setText(product.getName());
+        holder.tvPrice.setText(String.valueOf(product.getPrice()));
+        Picasso.get().load(product.getImageUrl()).into(holder.imgProduct);
     }
     @Override
     public int getItemCount() {
@@ -69,12 +82,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView favorite;
-        private ImageView imgUser;
+        private ImageView imgProduct;
         private TextView tvName;
         private TextView tvPrice;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgUser=itemView.findViewById(R.id.img_user);
+            imgProduct=itemView.findViewById(R.id.img_product);
             tvName=itemView.findViewById(R.id.tv_name);
             tvPrice=itemView.findViewById(R.id.tv_price);
             favorite = itemView.findViewById(R.id.favourite);

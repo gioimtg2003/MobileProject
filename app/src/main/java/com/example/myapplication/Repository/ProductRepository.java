@@ -18,6 +18,9 @@ public class ProductRepository {
     public void fetchDataSQLite(int idCategory, IFetchDataCallBack iFetchDataCallBack){
        iFetchDataCallBack.onResponseGetData(databaseProduct.getProductByCategory(idCategory));
     }
+    public void fetchDataProductFavourite(IFetchDataCallBack iFetchDataCallBack){
+        iFetchDataCallBack.onResponseGetData(databaseProduct.getAllProduct(2));
+    }
     public void addFavouriteProduct(int idProduct){
         databaseProduct.AddFavouriteProduct(idProduct);
     }

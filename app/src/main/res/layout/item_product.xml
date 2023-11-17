@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="300dp"
     android:layout_marginEnd="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="15dp"
@@ -10,15 +10,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:background="@drawable/vien">
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="5dp"
             android:layout_height="wrap_content">
 
             <ImageView
-                android:id="@+id/img_user"
+                android:id="@+id/img_product"
                 android:layout_width="match_parent"
                 android:layout_height="190dp"
                 android:layout_gravity="center"
@@ -33,7 +34,6 @@
                 android:id="@+id/favourite"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:layout_marginEnd="4dp"
                 android:src="@drawable/heart_stroke"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -46,21 +46,26 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:weightSum="10"
+            android:paddingEnd="10dp"
+            android:layout_gravity="bottom"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_weight="8"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_name"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:padding="6dp"
                     android:text="@string/app_name"
                     android:textColor="@color/black"
-                    android:textSize="20dp"
+                    android:textSize="16dp"
                     android:textStyle="bold" />
 
                 <TextView
@@ -75,23 +80,19 @@
 
             </LinearLayout>
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/themsp"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/them"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.93"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.488" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:id="@+id/img_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@drawable/add_circle" />
+            </LinearLayout>
         </LinearLayout>
 
 
