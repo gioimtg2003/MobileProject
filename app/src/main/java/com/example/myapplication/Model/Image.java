@@ -1,15 +1,15 @@
 package com.example.myapplication.Model;
 
 public class Image {
-    private int resourceID;
+    private String resourceID;
 
-    public Image(int resourceID) {
+    public Image(String resourceID) {
         this.resourceID = resourceID;
     }
 
-    public int getResourceID() {
+    public String getResourceID() {
         return resourceID;
     }
 
-    public void setResourceID(int resourceID) { this.resourceID = resourceID; }
+    public void setResourceID(String resourceID) { this.resourceID = resourceID; }
 }

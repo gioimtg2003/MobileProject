@@ -163,6 +163,12 @@ public class DatabaseProduct extends SQLiteOpenHelper {
         }
         return false;
     }
+
+    /**
+     * Get product by category.
+     * @param idCategory
+     * @return
+     */
     public List<Product> getProductByCategory(int idCategory){
         Log.d("APPDATA", "idCategory: " + String.valueOf(idCategory));
         List<Product> productList = new ArrayList<Product>();

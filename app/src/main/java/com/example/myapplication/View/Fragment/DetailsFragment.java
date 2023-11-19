@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.myapplication.R;
+import com.google.android.material.transition.MaterialFadeThrough;
+import com.google.android.material.transition.platform.MaterialFade;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -62,5 +64,6 @@ public class DetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_details, container, false);
+
     }
 }
