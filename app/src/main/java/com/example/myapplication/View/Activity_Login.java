@@ -118,8 +118,9 @@ public class Activity_Login extends AppCompatActivity {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if(aBoolean){
-                    Intent HomeIntent = new Intent(getApplication(), HomeActivity.class);
-                    startActivity(HomeIntent);
+                    Intent MainIntent = new Intent(getApplication(), MainActivity.class);
+                    startActivity(MainIntent);
+                    overridePendingTransition(R.anim.popexit, R.anim.popenter);
                 }
             }
         });
@@ -130,12 +131,17 @@ public class Activity_Login extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * Kiểm tra xem đã đăng nhập chưa, nếu rồi thì chuyển sang MainActivity
+     */
     private void checkSharedPrefs(){
         SharedPreferences sharedPreferences = getSharedPreferences("APP_STORAGE", MODE_PRIVATE);
         boolean isLogin = sharedPreferences.getBoolean("is_login", false);
         if (isLogin){
-            Intent HomeIntent = new Intent(getApplication(), HomeActivity.class);
-            startActivity(HomeIntent);
+            Intent MainIntent = new Intent(getApplication(), MainActivity.class);
+            startActivity(MainIntent);
+            overridePendingTransition(R.anim.popexit, R.anim.popenter);
         }
     }
     private void firebaseGetInstance(){
