@@ -40,6 +40,7 @@ public class HomeActivity extends AppCompatActivity {
         floatingActionButton = findViewById(R.id.fab);
         frameLayout = findViewById(R.id.frame_layout);
         fragmentManager = getSupportFragmentManager();
+        HomeFragment homeFragment = new HomeFragment();
         ReplaceFragment(new HomeFragment());
         floatingActionButton.setOnClickListener(v -> {
             Toast.makeText(this, "Click", Toast.LENGTH_SHORT).show();

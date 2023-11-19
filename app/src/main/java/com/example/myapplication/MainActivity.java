@@ -1,9 +1,16 @@
 package com.example.myapplication;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -26,7 +33,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SensorEventListener {
     private Button btn;
     private GoogleSignInClient client;
     private FirebaseAuth mAuth;
@@ -34,12 +41,17 @@ public class MainActivity extends AppCompatActivity {
     private boolean showOneTapUI = true;
     private SignInClient oneTapClient;
     private BeginSignInRequest signInRequest;
+    private SensorManager sensorManager;
+    private Sensor pressure;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         btn = findViewById(R.id.button);
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        pressure = sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE);
 //        mAuth = FirebaseAuth.getInstance();
 //        Button btn2 = findViewById(R.id.btnRegister);
 //
@@ -122,5 +134,29 @@ public class MainActivity extends AppCompatActivity {
 //                e.printStackTrace();
 //            }
 //        }
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        float millibarsOfPressure = event.values[0];
+        Log.d("APPDATA", "onSensorChanged: " + millibarsOfPressure);
+    }
+
+    @Override
+    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+
+    }
+    @Override
+    protected void onResume() {
+        // Register a listener for the sensor.
+        super.onResume();
+        sensorManager.registerListener(this, pressure, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    protected void onPause() {
+        // Be sure to unregister the sensor when the activity pauses.
+        super.onPause();
+        sensorManager.unregisterListener(this);
     }
 }

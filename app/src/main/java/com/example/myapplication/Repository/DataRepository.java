@@ -34,6 +34,7 @@ public class DataRepository
         this.context = application.getApplicationContext();
         this.databaseProduct = new DatabaseProduct(this.context);
         this.sharedPreferences = context.getSharedPreferences("version_data", Context.MODE_PRIVATE);
+
     }
     private void getDataFromServer(IResponse iResponseCallBack){
         ICategoryService getData = RetrofitClientInstance.getInstance().create(ICategoryService.class);
@@ -93,7 +94,6 @@ public class DataRepository
                                         }
                                     }
                                     iListCategory.getListCategory(databaseProduct.getAllCategory());
-
                                     Toast.makeText(context, "lấy dữ liệu oke" , Toast.LENGTH_SHORT).show();
                                 }else{
                                     Log.d("APPDATA", "Lấy dữ liệu từ server fail: " + responseCategory.getMessage());

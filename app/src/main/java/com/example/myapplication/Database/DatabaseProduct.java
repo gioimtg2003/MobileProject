@@ -102,11 +102,31 @@ public class DatabaseProduct extends SQLiteOpenHelper {
 
     /**
      * Get all product from database.
+     *
      * @return
      */
-    public List<Product> getAllProduct(){
+    public List<Product> getAllProduct() {
+        return getAllProduct(1);
+    }
+
+    /**
+     * Get all product from database.
+     * @return
+     */
+    public List<Product> getAllProduct(int type){
         List<Product> productList = new ArrayList<Product>();
-        String sql = "SELECT * FROM product";
+        String sql;
+        switch (type){
+            case 1:
+                sql = "SELECT * FROM product";
+                break;
+            case 2:
+                sql = "SELECT * FROM product WHERE favourite = 1";
+                break;
+            default:
+                sql = "SELECT * FROM product";
+                break;
+        }
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(sql, null);
         cursor.moveToFirst();
