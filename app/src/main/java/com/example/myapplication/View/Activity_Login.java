@@ -66,6 +66,7 @@ public class Activity_Login extends AppCompatActivity {
             public void onClick(View v) {
                 Intent RegisterIntent = new Intent(getApplication(), Activity_Register.class);
                 startActivity(RegisterIntent);
+                overridePendingTransition(R.anim.fadeout, R.anim.fadein);
             }
         });
         btnLoginGoogle.setOnClickListener(new View.OnClickListener() {
