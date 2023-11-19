@@ -3,31 +3,21 @@ package com.example.myapplication.View;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.fragment.app.FragmentActivity.*;
-import android.app.Activity;
-import android.content.res.ColorStateList;
+
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.example.myapplication.View.Fragment.FavouriteFagment;
 import com.example.myapplication.View.Fragment.HomeFragment;
-import com.google.android.material.bottomappbar.BottomAppBar;
-import com.google.android.material.bottomappbar.BottomAppBarTopEdgeTreatment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.shape.MaterialShapeDrawable;
-import com.google.android.material.shape.RelativeCornerSize;
-import com.google.android.material.shape.RoundedCornerTreatment;
 
-public class HomeActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private FloatingActionButton floatingActionButton;
     private FragmentManager fragmentManager ;

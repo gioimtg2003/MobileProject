@@ -23,7 +23,7 @@
             android:name=".View.ListProductActivity"
             android:exported="false" />
         <activity
-            android:name=".View.HomeActivity"
+            android:name=".View.MainActivity"
             android:exported="false" />
         <activity
             android:name=".View.Activity_Register"
