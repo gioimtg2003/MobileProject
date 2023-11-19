@@ -4,10 +4,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
@@ -80,6 +83,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.tvName.setText(product.getName());
         holder.tvPrice.setText(String.valueOf(product.getPrice()));
         Picasso.get().load(product.getImageUrl()).into(holder.imgProduct);
+        holder.cardView.startAnimation(AnimationUtils.loadAnimation(holder.cardView.getContext(), R.anim.anim_product));
         holder.imgProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,12 +102,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         private ImageView imgProduct;
         private TextView tvName;
         private TextView tvPrice;
+        private CardView cardView;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imgProduct=itemView.findViewById(R.id.img_product);
             tvName=itemView.findViewById(R.id.tv_name);
             tvPrice=itemView.findViewById(R.id.tv_price);
             favorite = itemView.findViewById(R.id.favourite);
+            cardView = itemView.findViewById(R.id.card_product);
         }
     }
 }
