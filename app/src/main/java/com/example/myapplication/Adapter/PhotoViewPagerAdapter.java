@@ -10,6 +10,7 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import com.example.myapplication.Model.Image;
 import com.example.myapplication.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -34,7 +35,7 @@ public class PhotoViewPagerAdapter extends PagerAdapter {
         View view = LayoutInflater.from( container.getContext() ).inflate( R.layout.item_image_slide, container, false );
         ImageView imgPhoto = view.findViewById( R.id.img_photo );
         Image photo = imgList.get( position );
-        imgPhoto.setImageResource( photo.getResourceID() );
+        Picasso.get().load( photo.getResourceID() ).into( imgPhoto );
         container.addView( view );
 
         return view;

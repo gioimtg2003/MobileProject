@@ -64,7 +64,7 @@ public class DataRepository
      * Nếu version server khác version local thì lấy dữ liệu từ server về và lưu vào SQLite.
      * Nếu version server giống version local thì lấy dữ liệu từ SQLite.
      */
-    public void handleData(IListCategory iListCategory){
+    public void handleData(IListData iListCategory){
         ICheckVersion checkVersion = RetrofitClientInstance.getInstance().create(ICheckVersion.class);
         Call<ResponseVersion> initCheckVersion = checkVersion.getVersion();
         initCheckVersion.enqueue(new Callback<ResponseVersion>() {
@@ -76,6 +76,8 @@ public class DataRepository
                     if(newVersion.equals(oldVersion)){
                         Log.d("APPDATA", "Check version oke: " + response.body().getVersion());
                         iListCategory.getListCategory(databaseProduct.getAllCategory());
+                        List<Product> listProduct = databaseProduct.getAllProduct();
+                        iListCategory.getListProduct(listProduct);
 
                     }else {
                         Log.d("APPDATA", "Dữ liệu cũ" + oldVersion + " dữ liệu mới: " + newVersion);
@@ -94,6 +96,8 @@ public class DataRepository
                                         }
                                     }
                                     iListCategory.getListCategory(databaseProduct.getAllCategory());
+                                    List<Product> listProduct = databaseProduct.getAllProduct();
+                                    iListCategory.getListProduct(listProduct);
                                     Toast.makeText(context, "lấy dữ liệu oke" , Toast.LENGTH_SHORT).show();
                                 }else{
                                     Log.d("APPDATA", "Lấy dữ liệu từ server fail: " + responseCategory.getMessage());
@@ -128,8 +132,14 @@ public class DataRepository
     }
 
 
-    public interface IListCategory{
+    public interface IListData{
         void getListCategory(List<Category> listCategory);
+        void getListProduct(List<Product> listProduct);
+    }
+
+    public void randomProduct(IListData iListData){
+        List<Product> listProduct = databaseProduct.getAllProduct();
+        iListData.getListProduct(listProduct);
     }
 }
 

@@ -22,6 +22,7 @@ import android.view.ViewGroup;
 import com.example.myapplication.Adapter.CategoryAdapter;
 import com.example.myapplication.Adapter.PhotoViewPagerAdapter;
 import com.example.myapplication.Adapter.ProductAdapter;
+import com.example.myapplication.Adapter.ProductRandomAdapter;
 import com.example.myapplication.Database.DatabaseProduct;
 import com.example.myapplication.Model.Category;
 import com.example.myapplication.Model.Image;
@@ -79,13 +80,10 @@ public class HomeFragment extends Fragment {
         mViewPager = view.findViewById( R.id.viewPager);
         mCircleIndicator = view.findViewById( R.id.circle_indicator );
         // Set Data
-        setViewPager();
         setDataCategory();
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
-        productRecyclerView.setLayoutManager(gridLayoutManager);
+        setViewPager();
 
-
-
+        setProductRandom();
     }
     private void setDataCategory(){
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity(),RecyclerView.HORIZONTAL,false);
@@ -105,13 +103,21 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+    private void setProductRandom(){
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(), 2);
+        productRecyclerView.setLayoutManager(gridLayoutManager);
+        dataViewModel.getProductMutableLiveData().observe(requireActivity(), new Observer<List<Product>>() {
+            @Override
+            public void onChanged(List<Product> products) {
+                productRecyclerView.setAdapter(new ProductRandomAdapter(products));
+            }
+        });
+    }
     private List<Image> setListProduct(){
         List<Image> list = new ArrayList<>();
-        list.add(new Image(R.drawable.category_garan));
-        list.add(new Image(R.drawable.category_garan));
-        list.add(new Image(R.drawable.category_garan));
-        list.add(new Image(R.drawable.category_garan));
-        list.add(new Image(R.drawable.category_garan));
+        for (Category c : databaseProduct.getAllCategory()){
+            list.add(new Image(c.getImageUrl()));
+        }
         return list;
     }
     private void setViewPager(){
@@ -131,7 +137,6 @@ public class HomeFragment extends Fragment {
             mHandler.removeCallbacks( mRunnable );
                 mHandler.postDelayed( mRunnable, 3000 );
             }
-
             @Override
             public void onPageScrollStateChanged(int state) {
 
