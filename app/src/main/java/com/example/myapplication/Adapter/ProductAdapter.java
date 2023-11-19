@@ -8,12 +8,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Model.Product;
 import com.example.myapplication.R;
+import com.example.myapplication.View.Fragment.DetailsFragment;
 import com.example.myapplication.ViewModel.ProductViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -27,6 +30,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
     private List<Product> productList;
     private ProductViewModel productViewModel;
+    // 1 là yêu thích, 0 là list sản phẩm
     private final byte favourite;
 
     public ProductAdapter(ProductViewModel productViewModel, byte favourite) {
@@ -57,6 +61,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             public void onClick(View v) {
                 if(product.getFavourite() == 1){
                     productViewModel.deleteFavouriteProduct(product.getId());
+                    // Nếu đang ở màn hình yêu thích thì cập nhật lại dữ liệu
                     if (favourite == 1)
                         productViewModel.fetchDataProductFavourite();
                     else
@@ -64,6 +69,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
                 }else{
                     productViewModel.addFavouriteProduct(product.getId());
+                    // Nếu đang ở màn hình yêu thích thì cập nhật lại dữ liệu
                     if (favourite == 1)
                         productViewModel.fetchDataProductFavourite();
                     else
@@ -74,6 +80,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.tvName.setText(product.getName());
         holder.tvPrice.setText(String.valueOf(product.getPrice()));
         Picasso.get().load(product.getImageUrl()).into(holder.imgProduct);
+        holder.imgProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment fragment = new DetailsFragment();
+
+            }
+        });
     }
     @Override
     public int getItemCount() {

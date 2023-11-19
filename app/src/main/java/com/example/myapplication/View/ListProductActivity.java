@@ -20,7 +20,6 @@ import com.example.myapplication.ViewModel.ProductViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
-
 public class ListProductActivity extends AppCompatActivity {
     private RecyclerView rcvProduct;
     private ProductAdapter mProductAdapter;
@@ -43,11 +42,9 @@ public class ListProductActivity extends AppCompatActivity {
         this.backPress.setOnClickListener(v -> {
             finish();
         });
-        mProductAdapter = new ProductAdapter(productViewModel);
+        mProductAdapter = new ProductAdapter(productViewModel, (byte) 0);
         gridLayoutManager = new GridLayoutManager(ListProductActivity.this,2);
         setAdapter();
-
-
     }
     private void setAdapter(){
         productViewModel.fetchDataSQLite(this.idCategory);

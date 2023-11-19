@@ -4,11 +4,71 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".View.Fragment.FavouriteFagment">
-
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        >
+
+        <LinearLayout
+            android:id="@+id/product"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp">
+
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="5"
+                    android:gravity="center"
+                    android:text="Fresh"
+                    android:textSize="28dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/title_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:labelFor="@id/textView2"
+                    android:text="Favourite"
+                    android:textColor="#63B23D"
+                    android:textSize="28dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="35dp"
+                android:layout_marginTop="23dp"
+                android:src="@drawable/chuong" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcv_product"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/product"
+            android:layout_marginStart="7dp"
+            android:layout_marginEnd="7dp"/>
+
+    </RelativeLayout>
 
 </FrameLayout>

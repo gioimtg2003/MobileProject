@@ -29,6 +29,14 @@ public class ProductViewModel extends AndroidViewModel {
             }
         });
     }
+    public void fetchDataProductFavourite(){
+        productRepository.fetchDataProductFavourite(new ProductRepository.IFetchDataCallBack() {
+            @Override
+            public void onResponseGetData(List<Product> productList) {
+                listProductMutableLiveData.postValue(productList);
+            }
+        });
+    }
     public void addFavouriteProduct(int idProduct){
         productRepository.addFavouriteProduct(idProduct);
 
