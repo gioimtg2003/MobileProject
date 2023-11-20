@@ -9,6 +9,7 @@ import android.util.Log;
 
 import androidx.annotation.Nullable;
 
+import com.example.myapplication.Model.Cart;
 import com.example.myapplication.Model.Category;
 import com.example.myapplication.Model.Product;
 
@@ -154,16 +155,6 @@ public class DatabaseProduct extends SQLiteOpenHelper {
         db.close();
         return categoryList;
     }
-    public Boolean checkDatabase(){
-        SQLiteDatabase db = this.getWritableDatabase();
-        String sql = "SELECT * FROM product";
-        Cursor cursor = db.rawQuery(sql, null);
-        if (cursor.getCount() > 0){
-            return true;
-        }
-        return false;
-    }
-
     /**
      * Get product by category.
      * @param idCategory
@@ -184,6 +175,57 @@ public class DatabaseProduct extends SQLiteOpenHelper {
         cursor.close();
         db.close();
         return productList;
+    }
+
+    /**
+     * Thêm sản phẩm mới vào giỏ hàng
+     * @param id
+     */
+    public void addCart(int id){
+        if (checkCart(id)){
+            String sql = "UPDATE cartProduct SET quantity = quantity + 1 WHERE idProduct = " + id;
+            SQLiteDatabase db = getWritableDatabase();
+            db.execSQL(sql);
+            db.close();
+        }else {
+            SQLiteDatabase db = this.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("idProduct", id);
+            values.put("quantity", 1);
+            db.insert("cartProduct", null, values);
+            db.close();
+        }
+    }
+    public void handleCart(Boolean type, int id){
+        String sql = type ? "UPDATE cartProduct SET quantity = quantity + 1 WHERE idProduct = " + id : "UPDATE cartProduct SET quantity = quantity - 1 WHERE idProduct = " + id;
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL(sql);
+        db.close();
+    }
+    public List<Cart> getCart(){
+        List<Cart> cartList = new ArrayList<Cart>();
+        String sql = "SELECT product.id AS id, product._id AS _id, product.name AS name, product.price AS price, product.imageUrl AS imageUrl, product.quantity AS quantity FROM product INNER JOIN cartProduct ON product.id = cartProduct.idProduct";
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(sql, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()){
+            Cart cart = new Cart(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getInt(5), cursor.getString(6), cursor.getInt(3), false);
+            cartList.add(cart);
+            cursor.moveToNext();
+        }
+        cursor.close();
+        db.close();
+        return cartList;
+    }
+    private Boolean checkCart(int id){
+        String sql = "SELECT * FROM cartProduct WHERE idProduct = " + id;
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(sql, null);
+        cursor.moveToFirst();
+        if (cursor.getCount() > 0){
+            return true;
+        }
+        return false;
     }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
