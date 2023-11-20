@@ -2,7 +2,9 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="green_unique">#7fe368</color>
+    <color name="green_unique">#48d728</color>
+    <color name="textColor">#7fe368</color>
+    <color name="BtnColor">#4B9F38</color>
     <color name="yellow">#def3</color>
     <color name="background_bottom_Bar">#a3f57d</color>
     <color name="click">#a3f57d</color>

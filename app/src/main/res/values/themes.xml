@@ -5,6 +5,7 @@
         <item name="colorPrimary" >@color/green_unique</item>
         <item name="colorSecondary">@color/green_unique</item>
         <item name="colorOnSurface">@color/white</item>
+        <item name="android:windowBackground">@color/white</item>
 
     </style>
     <!--        custom theme cho indicator-->

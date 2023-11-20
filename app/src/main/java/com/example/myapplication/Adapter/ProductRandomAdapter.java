@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Model.Product;
 import com.example.myapplication.R;
-import com.example.myapplication.View.Fragment.DetailsFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -56,7 +55,6 @@ public class ProductRandomAdapter extends RecyclerView.Adapter<ProductRandomAdap
         holder.imgProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new DetailsFragment();
 
             }
         });

@@ -1,25 +1,22 @@
 package com.example.myapplication.Adapter;
 
+import static androidx.core.content.ContextCompat.startActivity;
+
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelStoreOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Model.Product;
 import com.example.myapplication.R;
-import com.example.myapplication.View.Fragment.DetailsFragment;
+import com.example.myapplication.View.DetailActivity;
 import com.example.myapplication.ViewModel.ProductViewModel;
 import com.squareup.picasso.Picasso;
 
@@ -86,8 +83,14 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.imgProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Fragment fragment = new DetailsFragment();
-
+                Intent detail = new Intent(v.getContext(), DetailActivity.class);
+                detail.putExtra("_id", product.get_id());
+                detail.putExtra("id", product.getId());
+                detail.putExtra("name", product.getName());
+                detail.putExtra("price", product.getPrice());
+                detail.putExtra("description", product.getDescription());
+                detail.putExtra("imageUrl", product.getImageUrl());
+                startActivity(v.getContext(), detail, null);
             }
         });
     }
