@@ -92,7 +92,7 @@ public class DataRepository
                                         Category category = responseCategory.getData().get(i);
                                         databaseProduct.addCategory(new Category(category.get_id(), category.getName(), category.getImageUrl()));
                                         for(Product product : responseCategory.getData().get(i).getProducts()){
-                                            databaseProduct.addProduct(new Product(product.get_id(), product.getName(), product.getPrice(), product.getQuantity(), product.getImageUrl(), product.getDescription(), product.getCategory(), (i + 1)));
+                                            databaseProduct.addProduct(new Product(product.get_id(), product.getName(), product.getPrice(), product.getQuantity(), product.getDescription(), product.getImageUrl(), product.getCategory(), (i + 1)));
                                         }
                                     }
                                     iListCategory.getListCategory(databaseProduct.getAllCategory());
