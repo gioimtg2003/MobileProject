@@ -30,7 +30,7 @@ public class DatabaseProduct extends SQLiteOpenHelper {
      */
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String sql = "CREATE TABLE IF NOT EXISTS product (id INTEGER PRIMARY KEY AUTOINCREMENT, _id TEXT, name TEXT, price INTEGER, quantity INTEGER, imageUrl TEXT, description TEXT, category TEXT, idCategory INTEGER, favourite INTEGER DEFAULT 0)";
+        String sql = "CREATE TABLE IF NOT EXISTS product (id INTEGER PRIMARY KEY AUTOINCREMENT, _id TEXT, name TEXT, price INTEGER, quantity INTEGER, description TEXT, imageUrl TEXT, category TEXT, idCategory INTEGER, favourite INTEGER DEFAULT 0)";
         db.execSQL(sql);
         String sql1 = "CREATE TABLE IF NOT EXISTS category (id INTEGER PRIMARY KEY AUTOINCREMENT, _id TEXT, name TEXT, imageUrl TEXT)";
         db.execSQL(sql1);
@@ -93,8 +93,8 @@ public class DatabaseProduct extends SQLiteOpenHelper {
         values.put("name", product.getName());
         values.put("price", product.getPrice());
         values.put("quantity", product.getQuantity());
-        values.put("imageUrl", product.getImageUrl());
         values.put("description", product.getDescription());
+        values.put("imageUrl", product.getImageUrl());
         values.put("category", product.getCategory());
         values.put("idCategory", product.getIdCategory());
         db.insert("product", null, values);
@@ -140,6 +140,7 @@ public class DatabaseProduct extends SQLiteOpenHelper {
         db.close();
         return productList;
     }
+
     public List<Category> getAllCategory(){
         List<Category> categoryList = new ArrayList<Category>();
         String sql = "SELECT * FROM category";
@@ -155,6 +156,7 @@ public class DatabaseProduct extends SQLiteOpenHelper {
         db.close();
         return categoryList;
     }
+
     /**
      * Get product by category.
      * @param idCategory
@@ -203,15 +205,18 @@ public class DatabaseProduct extends SQLiteOpenHelper {
         db.close();
     }
     public List<Cart> getCart(){
+        int count = 0;
         List<Cart> cartList = new ArrayList<Cart>();
-        String sql = "SELECT product.id AS id, product._id AS _id, product.name AS name, product.price AS price, product.imageUrl AS imageUrl, product.quantity AS quantity FROM product INNER JOIN cartProduct ON product.id = cartProduct.idProduct";
+        String sql_ = "SELECT product.id AS id, product._id AS _id, product.name AS name, product.price AS price, product.imageUrl, cartProduct.quantity AS quantity FROM cartProduct INNER JOIN product ON product.id = cartProduct.idProduct";
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery(sql, null);
+
+        Cursor cursor = db.rawQuery(sql_, null);
         cursor.moveToFirst();
         while (!cursor.isAfterLast()){
-            Cart cart = new Cart(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getInt(5), cursor.getString(6), cursor.getInt(3), false);
+            Cart cart = new Cart(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getInt(3), cursor.getString(4), cursor.getInt(5), false);
             cartList.add(cart);
             cursor.moveToNext();
+            count++;
         }
         cursor.close();
         db.close();

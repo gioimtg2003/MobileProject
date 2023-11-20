@@ -4,6 +4,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
@@ -50,18 +52,25 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     public class CartViewHolder extends RecyclerView.ViewHolder {
         private Button btnIncrease, btnDecrease;
-        private RadioButton radioBtn;
+        private CheckBox checkBox;
         private ImageView imageProduct;
-        private TextView nameProduct, priceProduct, editQuantity;
+        private TextView nameProduct, priceProduct;
+        private EditText editQuantity;
             public CartViewHolder(@NonNull View itemView) {
                 super(itemView);
                 btnIncrease = itemView.findViewById(R.id.btnIncrease);
                 btnDecrease = itemView.findViewById(R.id.btnDecrease);
-                radioBtn = itemView.findViewById(R.id.radioBtn);
+                checkBox = itemView.findViewById(R.id.radioBtn);
                 imageProduct = itemView.findViewById(R.id.imageProduct);
                 nameProduct = itemView.findViewById(R.id.nameProduct);
                 priceProduct = itemView.findViewById(R.id.priceProduct);
                 editQuantity = itemView.findViewById(R.id.editQuantity);
+                editQuantity.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View v, boolean hasFocus) {
+
+                    }
+                });
             }
         }
 }
