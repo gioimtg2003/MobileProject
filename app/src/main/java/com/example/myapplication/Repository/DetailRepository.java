@@ -15,7 +15,7 @@ public class DetailRepository {
     }
     public void addCart(int idProduct){
         databaseProduct.addCart(idProduct);
-        Log.d ("APPDATA", "Add cart product: " + String.valueOf(idProduct));
+        Log.d ("APPDATA", "Add cart product id : " + String.valueOf(idProduct));
     }
     public Context getContext() {
         return context;
