@@ -48,6 +48,5 @@
         android:src="@drawable/cart_icon"
         app:layout_anchor="@id/bottomAppBar"
         app:maxImageSize="40dp"
-        app:shapeAppearance="@style/Widget.MaterialComponents.BottomAppBar.PrimarySurface"
         app:tint="@color/green_unique" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
