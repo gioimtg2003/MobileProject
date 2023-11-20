@@ -23,6 +23,7 @@
         android:layout_height="wrap_content">
 
         <LinearLayout
+            android:paddingBottom="40dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
@@ -131,22 +132,31 @@
                     android:layout_marginLeft="20dp"
                     android:layout_weight="3"
                     android:text="Gửi" />
-
             </LinearLayout>
-
+            <ProgressBar
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:visibility="gone"
+                />
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rcvComment"
                 android:layout_width="match_parent"
+                android:layout_marginTop="10dp"
                 android:layout_height="match_parent" />
 
         </LinearLayout>
-
     </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>
 
     <Button
-        android:layout_width="match_parent"
+        android:id="@+id/btnAddCart"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
+        android:layout_gravity="bottom|center"
+        android:backgroundTint="@color/BtnColor"
+        android:textSize="16sp"
         android:text="Thêm giỏ hàng" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
