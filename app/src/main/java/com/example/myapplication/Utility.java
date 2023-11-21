@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.TimeZone;
 
 public class Utility {
-    public static String formatPrice(int price){
+    public static String formatMoney(int price){
         DecimalFormat formatter = new DecimalFormat("#,###");
         return formatter.format(price)  + " đ";
     }

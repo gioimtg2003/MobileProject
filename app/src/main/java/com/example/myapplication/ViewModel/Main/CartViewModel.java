@@ -17,6 +17,7 @@ public class CartViewModel extends AndroidViewModel {
     private MutableLiveData<List<Cart>> listCart = new MutableLiveData<List<Cart>>();
     private MutableLiveData<List<Integer>> listChecked = new MutableLiveData<List<Integer>>();
     private MutableLiveData<Boolean> containerDelete = new MutableLiveData<Boolean>();
+    private MutableLiveData<Integer> totalMoney = new MutableLiveData<Integer>();
     private CartRepository cartRepository;
     public CartViewModel(@NonNull Application application) {
         super(application);
@@ -29,6 +30,7 @@ public class CartViewModel extends AndroidViewModel {
         List<Integer> listChecked_ = new ArrayList<Integer>();
         this.listCart.setValue(listCart_);
         this.listChecked.setValue(listChecked_);
+        this.totalMoney.setValue(0);
     }
 
     /**
@@ -62,9 +64,7 @@ public class CartViewModel extends AndroidViewModel {
         }else {
             containerDelete.setValue(false);
         }
-        for (Integer i : listCheckedTemp){
-            Log.d("LISTCHECKED", "Add i = " + String.valueOf(i));
-        }
+        setTotalMoney();
     }
     public void removeListChecked(int index){
         List<Integer> integerList = listChecked.getValue();
@@ -77,9 +77,7 @@ public class CartViewModel extends AndroidViewModel {
                 containerDelete.setValue(false);
             }
         }
-        for (Integer i : listChecked.getValue()){
-            Log.d("LISTCHECKED", "deleted i =" + String.valueOf(i));
-        }
+        setTotalMoney();
     }
     public void setListCart(MutableLiveData<List<Cart>> listCart) {
         this.listCart = listCart;
@@ -99,5 +97,17 @@ public class CartViewModel extends AndroidViewModel {
 
     public void setListChecked(MutableLiveData<List<Integer>> listChecked) {
         this.listChecked = listChecked;
+    }
+
+    public MutableLiveData<Integer> getTotalMoney() {
+        return totalMoney;
+    }
+
+    public void setTotalMoney() {
+        int totalMoneyTemp = 0;
+        for (Integer i : listChecked.getValue()){
+            totalMoneyTemp += listCart.getValue().get(i).getPrice() * listCart.getValue().get(i).getQuantity();
+        }
+        totalMoney.setValue(totalMoneyTemp);
     }
 }
