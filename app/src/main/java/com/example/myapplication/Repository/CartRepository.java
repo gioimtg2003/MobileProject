@@ -15,6 +15,9 @@ public class CartRepository {
         this.context = application.getApplicationContext();
         this.databaseProduct = new DatabaseProduct(context);
     }
+    public void deleteCart(int id){
+        databaseProduct.deleteCart(id);
+    }
     public void increaseCart(int id){
         databaseProduct.handleCart(true, id);
     }

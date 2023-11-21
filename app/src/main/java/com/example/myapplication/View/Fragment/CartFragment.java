@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.myapplication.Adapter.CartAdapter;
 import com.example.myapplication.Model.Cart;
@@ -32,7 +33,7 @@ public class CartFragment extends Fragment {
     private CartViewModel cartViewModel;
     private CartAdapter cartAdapter;
     private TextView txtTotalMoney;
-    private Button btnDelete, btnBuy;
+    private Button btnDelete, btnPurchase;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -49,12 +50,15 @@ public class CartFragment extends Fragment {
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         rcvCart.setLayoutManager(linearLayoutManager);
         listenerData();
+        handleClick();
     }
 
     private void initView(View view){
         rcvCart = view.findViewById(R.id.rcvCart);
         containerDelete = view.findViewById(R.id.containerDelete);
         txtTotalMoney = view.findViewById(R.id.totalMoney);
+        btnDelete = view.findViewById(R.id.btnDelete);
+        btnPurchase = view.findViewById(R.id.btnPurchase);
     }
     private void listenerData(){
         this.cartViewModel.getListCart().observe(requireActivity(), new Observer<List<Cart>>() {
@@ -78,6 +82,23 @@ public class CartFragment extends Fragment {
             @Override
             public void onChanged(Integer integer) {
                 txtTotalMoney.setText("Tổng cộng: " + Utility.formatMoney(integer));
+            }
+        });
+    }
+    private void handleClick(){
+        this.btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cartViewModel.deleteCart();
+            }
+        });
+        this.btnPurchase.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(cartViewModel.getListChecked().getValue().size() > 0) {
+                }else {
+                    Toast.makeText(requireActivity(), "Vui lòng chọn sản phẩm", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }

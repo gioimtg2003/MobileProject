@@ -79,6 +79,13 @@ public class CartViewModel extends AndroidViewModel {
         }
         setTotalMoney();
     }
+    public void deleteCart(){
+        for (Integer i : listChecked.getValue()){
+            cartRepository.deleteCart(listCart.getValue().get(i).getId());
+        }
+        initData();
+        getListCart();
+    }
     public void setListCart(MutableLiveData<List<Cart>> listCart) {
         this.listCart = listCart;
     }
