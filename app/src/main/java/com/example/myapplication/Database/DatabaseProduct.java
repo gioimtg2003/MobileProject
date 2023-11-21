@@ -232,6 +232,12 @@ public class DatabaseProduct extends SQLiteOpenHelper {
         }
         return false;
     }
+    public void deleteCart(int id){
+        String sql = "DELETE FROM cartProduct WHERE idProduct = " + id;
+        SQLiteDatabase db = getWritableDatabase();
+        db.execSQL(sql);
+        db.close();
+    }
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         String sql = "DROP TABLE IF EXISTS product";
