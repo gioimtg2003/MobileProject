@@ -5,9 +5,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,15 +15,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Model.Cart;
 import com.example.myapplication.R;
+import com.example.myapplication.ViewModel.Main.CartViewModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder>{
     private List<Cart> cartList;
+    private CartViewModel cartViewModel;
 
-    public CartAdapter(List<Cart> cartList) {
+    public CartAdapter(List<Cart> cartList, CartViewModel cartViewModel) {
         this.cartList = cartList;
+        this.cartViewModel = cartViewModel;
     }
 
     @NonNull
@@ -43,6 +46,16 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 .load(cart.getImageUrl())
                 .error(R.drawable.category_garan)
                 .into(holder.imageProduct);
+        holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked){
+                    cartViewModel.addListChecked(position);
+                }else {
+                    cartViewModel.removeListChecked(position);
+                }
+            }
+        });
     }
 
     @Override
