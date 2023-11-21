@@ -80,15 +80,7 @@ public class Activity_Login extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        SharedPreferences sharedPreferences = getSharedPreferences("APP_STORAGE", MODE_PRIVATE);
-        boolean isLogin = sharedPreferences.getBoolean("is_login", false);
-        if (isLogin){
-            onBackPressed();
-        }
-    }
+
 
     private void mapping(){
         progressBar = findViewById(R.id.progressBar);
@@ -119,6 +111,7 @@ public class Activity_Login extends AppCompatActivity {
             public void onChanged(Boolean aBoolean) {
                 if(aBoolean){
                     Intent MainIntent = new Intent(getApplication(), MainActivity.class);
+                    MainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(MainIntent);
                     overridePendingTransition(R.anim.popexit, R.anim.popenter);
                 }
@@ -140,6 +133,7 @@ public class Activity_Login extends AppCompatActivity {
         boolean isLogin = sharedPreferences.getBoolean("is_login", false);
         if (isLogin){
             Intent MainIntent = new Intent(getApplication(), MainActivity.class);
+            MainIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(MainIntent);
             overridePendingTransition(R.anim.popexit, R.anim.popenter);
         }
