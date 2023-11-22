@@ -14,7 +14,7 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="9"
             android:orientation="vertical">
 
@@ -33,16 +33,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="0.7dp"
                 android:background="@color/green_unique" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/containerDelete"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="#E4E3E3">
+                android:background="#E4E3E3"
+                android:visibility="gone">
 
                 <Button
                     android:id="@+id/btnDelete"
@@ -51,24 +53,26 @@
                     android:layout_height="wrap_content"
                     android:backgroundTint="@color/background_bottom_Bar"
                     android:padding="0dp"
-                    android:textStyle="bold"
                     android:text="Xóa"
                     android:textColor="#FF5722"
+                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.95"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <androidx.recyclerview.widget.RecyclerView
-                    android:paddingLeft="20dp"
-                    android:paddingRight="20dp"
+                    android:id="@+id/rcvCart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/recyclerViewCart"/>
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp" />
             </androidx.core.widget.NestedScrollView>
         </LinearLayout>
 
@@ -80,14 +84,15 @@
             android:weightSum="10">
 
             <TextView
+                android:id="@+id/totalMoney"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="6"
                 android:background="@drawable/custom_stroke"
                 android:gravity="end"
                 android:padding="10dp"
-                android:textSize="16sp"
-                android:text="Tổng cộng: 110.000đ" />
+                android:text="Tổng cộng: 110.000đ"
+                android:textSize="16sp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="0dp"

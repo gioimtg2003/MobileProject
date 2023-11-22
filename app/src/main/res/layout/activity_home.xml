@@ -27,14 +27,15 @@
         app:fabCradleMargin="10dp"
         app:fabAlignmentMode="center"
         app:fabCradleRoundedCornerRadius="10dp">
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/bottomNavigationView"
-            app:itemActiveIndicatorStyle="@style/Custom.Indicator"
             android:layout_marginEnd="20dp"
-            app:labelVisibilityMode="labeled"
             android:background="@drawable/custom_navigation_bar"
+            app:itemActiveIndicatorStyle="@style/Custom.Indicator"
+            app:labelVisibilityMode="labeled"
             app:menu="@menu/button_app_bar">
 
         </com.google.android.material.bottomnavigation.BottomNavigationView>
@@ -48,5 +49,6 @@
         android:src="@drawable/cart_icon"
         app:layout_anchor="@id/bottomAppBar"
         app:maxImageSize="40dp"
+        style="@style/Widget.Material3.FloatingActionButton.Primary"
         app:tint="@color/green_unique" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

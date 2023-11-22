@@ -15,9 +15,8 @@
         android:title="Favourite" />
     <item
         android:id="@+id/cart"
-        android:title=""
-        android:enabled="false"
-        />
+        android:enabled="true"
+        android:title="" />
     <item
         android:id="@+id/profile"
         android:enabled="true"

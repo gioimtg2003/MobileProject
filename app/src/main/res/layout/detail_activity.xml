@@ -16,6 +16,7 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
         app:navigationIcon="@drawable/muiten"
+        android:layout_gravity="center_horizontal"
         app:title="Tên món ăn"/>
 
     <androidx.core.widget.NestedScrollView

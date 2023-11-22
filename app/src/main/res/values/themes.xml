@@ -5,13 +5,15 @@
         <item name="colorPrimary" >@color/green_unique</item>
         <item name="colorSecondary">@color/green_unique</item>
         <item name="colorOnSurface">@color/white</item>
+        <item name="colorSurface">@color/green_unique</item>
         <item name="android:windowBackground">@color/white</item>
 
     </style>
     <!--        custom theme cho indicator-->
     <style name="Custom.Indicator" parent="Widget.Material3.BottomNavigationView.ActiveIndicator">
-        <item name="android:color">@color/indicator_color</item>
+        <item name="android:color">@color/green_unique</item>
     </style>
+
     <style name="Custom.Shape.ImageView" parent="">
         <item name="cornerFamilyTopLeft">rounded</item>
         <item name="cornerFamilyTopRight">cut</item>

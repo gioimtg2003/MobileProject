@@ -16,6 +16,7 @@ public class OrderViewModel extends AndroidViewModel {
     private OrderRepository orderRepository;
     private MutableLiveData<List<Integer>> listIdChecked = new MutableLiveData<>();
     private MutableLiveData<List<Product>> listProductInCart = new MutableLiveData<>();
+    private MutableLiveData<Integer> totalMoney = new MutableLiveData<>();
     public OrderViewModel(@NonNull Application application) {
         super(application);
         this.orderRepository = new OrderRepository(application);
@@ -34,6 +35,11 @@ public class OrderViewModel extends AndroidViewModel {
                 listProductInCart.setValue(listProduct);
             }
         });
+        int totalMoneyTemp = 0;
+        for (Product product : listProductInCart.getValue()){
+            totalMoneyTemp += product.getPrice() * product.getQuantity();
+        }
+        totalMoney.setValue(totalMoneyTemp);
     }
     public MutableLiveData<List<Integer>> getListIdChecked() {
         return listIdChecked;
@@ -49,5 +55,13 @@ public class OrderViewModel extends AndroidViewModel {
 
     public void setListProductInCart(MutableLiveData<List<Product>> listProductInCart) {
         this.listProductInCart = listProductInCart;
+    }
+
+    public MutableLiveData<Integer> getTotalMoney() {
+        return totalMoney;
+    }
+
+    public void setTotalMoney(MutableLiveData<Integer> totalMoney) {
+        this.totalMoney = totalMoney;
     }
 }

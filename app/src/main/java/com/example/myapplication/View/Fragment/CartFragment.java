@@ -96,6 +96,7 @@ public class CartFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if(cartViewModel.getListChecked().getValue().size() > 0) {
+                    cartViewModel.buyCart();
                 }else {
                     Toast.makeText(requireActivity(), "Vui lòng chọn sản phẩm", Toast.LENGTH_SHORT).show();
                 }

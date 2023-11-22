@@ -12,6 +12,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.example.myapplication.R;
+import com.example.myapplication.View.Fragment.CartFragment;
 import com.example.myapplication.View.Fragment.FavouriteFagment;
 import com.example.myapplication.View.Fragment.HomeFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -29,11 +30,12 @@ public class MainActivity extends AppCompatActivity {
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         floatingActionButton = findViewById(R.id.fab);
         frameLayout = findViewById(R.id.frame_layout);
-        fragmentManager = getSupportFragmentManager();
+
         HomeFragment homeFragment = new HomeFragment();
         ReplaceFragment(new HomeFragment());
         floatingActionButton.setOnClickListener(v -> {
-            Toast.makeText(this, "Click", Toast.LENGTH_SHORT).show();
+            ReplaceFragment(new CartFragment());
+            bottomNavigationView.setSelectedItemId(R.id.cart);
         });
         // khi nhấn 2 lần vào 1 item nào đó thì sẽ không làm gì cả
         bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
@@ -56,10 +58,9 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-
     }
     private void ReplaceFragment(Fragment fragment){
+        fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.commit();

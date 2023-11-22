@@ -1,6 +1,5 @@
 package com.example.myapplication.View.Fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -21,14 +20,13 @@ import android.view.ViewGroup;
 
 import com.example.myapplication.Adapter.CategoryAdapter;
 import com.example.myapplication.Adapter.PhotoViewPagerAdapter;
-import com.example.myapplication.Adapter.ProductAdapter;
 import com.example.myapplication.Adapter.ProductRandomAdapter;
 import com.example.myapplication.Database.DatabaseProduct;
 import com.example.myapplication.Model.Category;
 import com.example.myapplication.Model.Image;
 import com.example.myapplication.Model.Product;
 import com.example.myapplication.R;
-import com.example.myapplication.ViewModel.Home.DataViewModel;
+import com.example.myapplication.ViewModel.Main.DataViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -97,7 +95,7 @@ public class HomeFragment extends Fragment {
                 for (Category category : categoryList){
                     List<Product> productList = databaseProduct.getProductByCategory(category.getId());
                     for (Product product : productList){
-                        Log.d("APPDATA", "id: " + product.getId() + " name: " + product.getName() + " price: " + product.getPrice() + " category: " + product.getIdCategory() + " favorite: " + product.getFavourite());
+                        Log.d("APPDATA", "_id: " + product.get_id() + " name: " + product.getName() + " price: " + product.getPrice() + " category: " + product.getIdCategory() + " favorite: " + product.getFavourite());
                     }
                 }
             }

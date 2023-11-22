@@ -134,6 +134,7 @@
                         android:text="Tổng tiền hàng"
                         android:textColor="#417336"/>
                     <TextView
+                        android:id="@+id/totalMoney0"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="#417336"
@@ -156,7 +157,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="#417336"
-                        android:text="110,000đ"
+                        android:text="0đ"
                         android:gravity="end"/>
                 </LinearLayout>
                 <LinearLayout
@@ -175,7 +176,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="#417336"
-                        android:text="110,000đ"
+                        android:text="0đ"
                         android:gravity="end"/>
                 </LinearLayout>
                 <LinearLayout
@@ -189,11 +190,13 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Tổng cộng"
-                        android:textSize="16dp"/>
+                        android:textSize="20dp"/>
                     <TextView
+                        android:id="@+id/totalMoney"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/green_unique"
+                        android:textSize="18dp"
                         android:text="110,000đ"
                         android:gravity="end"/>
                 </LinearLayout>
@@ -222,6 +225,7 @@
                 android:gravity="center_vertical|end"
                 android:paddingRight="10dp"/>
             <TextView
+                android:id="@+id/totalMoney1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
@@ -233,7 +237,7 @@
 
         </LinearLayout>
         <Button
-            android:id="@+id/btnPayment"
+            android:id="@+id/btnOrder"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"

@@ -22,12 +22,19 @@ public class ProductViewModel extends AndroidViewModel {
         this.productRepository = new ProductRepository(application);
     }
     public void fetchDataSQLite(int idCategory){
-        productRepository.fetchDataSQLite(idCategory, new ProductRepository.IFetchDataCallBack() {
+        Thread thread = new Thread(new Runnable() {
             @Override
-            public void onResponseGetData(List<Product> productList) {
-                listProductMutableLiveData.postValue(productList);
+            public void run() {
+                productRepository.fetchDataSQLite(idCategory, new ProductRepository.IFetchDataCallBack() {
+                    @Override
+                    public void onResponseGetData(List<Product> productList) {
+                        listProductMutableLiveData.postValue(productList);
+                    }
+                });
             }
         });
+        thread.start();
+
     }
     public void fetchDataProductFavourite(){
         productRepository.fetchDataProductFavourite(new ProductRepository.IFetchDataCallBack() {

@@ -15,6 +15,7 @@ import com.example.myapplication.R;
 import com.example.myapplication.ViewModel.DetailViewModel;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textfield.TextInputLayout;
+import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity {
     private String _id;
@@ -64,12 +65,14 @@ public class DetailActivity extends AppCompatActivity {
         this.inputComment = this.findViewById(R.id.InputComment);
         this.btnAddCart = this.findViewById(R.id.btnAddCart);
         this.recyclerView = this.findViewById(R.id.rcvComment);
+        this.imageView = this.findViewById(R.id.imageProductDetail);
     }
     private void setDataFormIntentToView(){
         this.materialToolbar.setTitle(this.name);
         this.nameProduct.setText(this.name);
         this.priceProduct.setText(String.valueOf(this.price));
         this.descriptionDetail.setText(this.description);
+        Picasso.get().load(this.imageUrl).into(this.imageView);
     }
     private void handleClick(){
         this.materialToolbar.setNavigationOnClickListener(new View.OnClickListener() {
