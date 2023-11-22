@@ -46,14 +46,17 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 .load(cart.getImageUrl())
                 .error(R.drawable.category_garan)
                 .into(holder.imageProduct);
+        holder.checkBox.setChecked(cart.getChecked());
         holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    cartViewModel.addListChecked(position);
-                }else {
-                    cartViewModel.removeListChecked(position);
-                }
+                    if (isChecked){
+                        cartViewModel.addListChecked(position);
+                    }else {
+                        cartViewModel.removeListChecked(position);
+                    }
+
+
             }
         });
     }

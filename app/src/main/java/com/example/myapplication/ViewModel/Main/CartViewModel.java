@@ -1,6 +1,7 @@
 package com.example.myapplication.ViewModel.Main;
 
 import android.app.Application;
+import android.content.Intent;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -9,12 +10,14 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.myapplication.Model.Cart;
 import com.example.myapplication.Repository.CartRepository;
+import com.example.myapplication.View.Order.OrderActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class CartViewModel extends AndroidViewModel {
     private MutableLiveData<List<Cart>> listCart = new MutableLiveData<List<Cart>>();
+    private MutableLiveData<List<Cart>> listProductBuy = new MutableLiveData<List<Cart>>();
     private MutableLiveData<List<Integer>> listChecked = new MutableLiveData<List<Integer>>();
     private MutableLiveData<Boolean> containerDelete = new MutableLiveData<Boolean>();
     private MutableLiveData<Integer> totalMoney = new MutableLiveData<Integer>();
@@ -31,6 +34,7 @@ public class CartViewModel extends AndroidViewModel {
         this.listCart.setValue(listCart_);
         this.listChecked.setValue(listChecked_);
         this.totalMoney.setValue(0);
+        this.listProductBuy.setValue(listCart_);
     }
 
     /**
@@ -59,12 +63,26 @@ public class CartViewModel extends AndroidViewModel {
         List<Integer> listCheckedTemp = listChecked.getValue();
         listCheckedTemp.add(index);
         listChecked.setValue(listCheckedTemp);
+
         if(listChecked.getValue().size() > 0){
             containerDelete.setValue(true);
         }else {
             containerDelete.setValue(false);
         }
         setTotalMoney();
+
+        Log.d("DEBUGCART", "addListChecked id: " + String.valueOf(listCart.getValue().get(index).getId()));
+        Log.d("DEBUGCART", "Size listchecked: " + String.valueOf(listChecked.getValue().size()));
+    }
+    public void addListProductBuy(int index){
+        List<Cart> listProductBuyTemp = listProductBuy.getValue();
+        listProductBuyTemp.add(listCart.getValue().get(index));
+        listProductBuy.setValue(listProductBuyTemp);
+    }
+    public void removeListProductBuy(int index){
+        List<Cart> listProductBuyTemp = listProductBuy.getValue();
+        listProductBuyTemp.remove(listCart.getValue().get(index));
+        listProductBuy.setValue(listProductBuyTemp);
     }
     public void removeListChecked(int index){
         List<Integer> integerList = listChecked.getValue();
@@ -78,13 +96,30 @@ public class CartViewModel extends AndroidViewModel {
             }
         }
         setTotalMoney();
+
+        Log.d("DEBUGCART", "removeListChecked id: " + String.valueOf(listCart.getValue().get(index).getId()));
+        Log.d("DEBUGCART", "Size listchecked: " + String.valueOf(listChecked.getValue().size()));
     }
     public void deleteCart(){
         for (Integer i : listChecked.getValue()){
             cartRepository.deleteCart(listCart.getValue().get(i).getId());
+            Log.d("DEBUGCART", "deleteCart id: " + String.valueOf(listCart.getValue().get(i).getId()));
         }
         initData();
         getListCart();
+    }
+    public void buyCart(){
+        Intent intent = new Intent(getApplication(), OrderActivity.class);
+
+        List<Integer> listId = new ArrayList<Integer>();
+        List<Cart> listCartTemp = listCart.getValue();
+        for (Integer i : listChecked.getValue()){
+            listId.add(listCartTemp.get(i).getId());
+            Log.d("DEBUGCART", "buyCartID: " + String.valueOf(listCartTemp.get(i).getId()));
+        }
+        intent.putExtra("listChecked", (ArrayList<Integer>) listId);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        getApplication().startActivity(intent);
     }
     public void setListCart(MutableLiveData<List<Cart>> listCart) {
         this.listCart = listCart;
@@ -116,5 +151,13 @@ public class CartViewModel extends AndroidViewModel {
             totalMoneyTemp += listCart.getValue().get(i).getPrice() * listCart.getValue().get(i).getQuantity();
         }
         totalMoney.setValue(totalMoneyTemp);
+    }
+
+    public MutableLiveData<List<Cart>> getListProductBuy() {
+        return listProductBuy;
+    }
+
+    public void setListProductBuy(MutableLiveData<List<Cart>> listProductBuy) {
+        this.listProductBuy = listProductBuy;
     }
 }
