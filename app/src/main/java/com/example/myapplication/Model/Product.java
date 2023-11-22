@@ -11,6 +11,15 @@ public class Product {
     private String category;
     private int idCategory;
     private int favourite;
+    public Product (int id, String _id, String name, int price, String description, String imageUrl, int quantity){
+        this.id = id;
+        this._id = _id;
+        this.name = name;
+        this.price = price;
+        this.description = description;
+        this.imageUrl = imageUrl;
+        this.quantity = quantity;
+    }
     public Product(int id, String _id, String name, int price, String imageUrl){
         this.id = id;
         this._id = _id;
