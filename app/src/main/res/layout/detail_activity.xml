@@ -154,10 +154,11 @@
 
     <Button
         android:id="@+id/btnAddCart"
-        android:layout_width="300dp"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:backgroundTint="@color/BtnColor"
+        style="@style/Widget.AppCompat.Button"
         android:textSize="16sp"
         android:text="Thêm giỏ hàng" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
