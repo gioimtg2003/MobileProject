@@ -50,6 +50,7 @@ public class OrderActivity extends AppCompatActivity {
         this.txtTotalMoney0 = this.findViewById(R.id.totalMoney0);
         this.txtTotalMoney1 = this.findViewById(R.id.totalMoney1);
         this.materialToolbar = this.findViewById(R.id.materialToolbar);
+
     }
     private void getDataFromIntent(){
         intent = getIntent();

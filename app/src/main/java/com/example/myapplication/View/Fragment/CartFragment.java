@@ -1,5 +1,6 @@
 package com.example.myapplication.View.Fragment;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +25,9 @@ import com.example.myapplication.Model.Cart;
 import com.example.myapplication.R;
 import com.example.myapplication.Utility;
 import com.example.myapplication.ViewModel.Main.CartViewModel;
+import com.google.android.material.appbar.MaterialToolbar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -32,12 +36,19 @@ public class CartFragment extends Fragment {
     private ConstraintLayout containerDelete;
     private CartViewModel cartViewModel;
     private CartAdapter cartAdapter;
-    private TextView txtTotalMoney;
+    private TextView txtTotalMoney, title;
     private Button btnDelete, btnPurchase;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        this.cartViewModel = new ViewModelProvider(requireActivity()).get(CartViewModel.class);
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        Log.d("DEBUGCART", "fragment OnCreateView: ");
         return inflater.inflate(R.layout.fragment_cart, container, false);
     }
 
@@ -45,12 +56,22 @@ public class CartFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
-        this.cartViewModel = new ViewModelProvider(requireActivity()).get(CartViewModel.class);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(requireActivity());
         linearLayoutManager.setOrientation(RecyclerView.VERTICAL);
         rcvCart.setLayoutManager(linearLayoutManager);
         listenerData();
         handleClick();
+        Log.d("DEBUGCART", "fragment onViewCreated: ");
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        ArrayList<Integer> listTemp = new ArrayList<Integer>();
+        cartViewModel.getListChecked().setValue(listTemp);
+        cartViewModel.getTotalMoney().setValue(0);
+        cartViewModel.getContainerDelete().setValue(false);
+
     }
 
     private void initView(View view){
@@ -59,6 +80,8 @@ public class CartFragment extends Fragment {
         txtTotalMoney = view.findViewById(R.id.totalMoney);
         btnDelete = view.findViewById(R.id.btnDelete);
         btnPurchase = view.findViewById(R.id.btnPurchase);
+        title = view.findViewById(R.id.title);
+        title.setText("Giỏ hàng (0)");
     }
     private void listenerData(){
         this.cartViewModel.getListCart().observe(requireActivity(), new Observer<List<Cart>>() {
@@ -66,6 +89,7 @@ public class CartFragment extends Fragment {
             public void onChanged(List<Cart> carts) {
                 cartAdapter = new CartAdapter(carts, cartViewModel);
                 rcvCart.setAdapter(cartAdapter);
+                title.setText("Giỏ hàng (" + carts.size() + ")");
             }
         });
         this.cartViewModel.getContainerDelete().observe(requireActivity(), new Observer<Boolean>() {

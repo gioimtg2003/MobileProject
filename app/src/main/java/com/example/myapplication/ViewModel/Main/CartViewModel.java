@@ -27,7 +27,7 @@ public class CartViewModel extends AndroidViewModel {
         this.cartRepository = new CartRepository(application);
         initData();
     }
-    private void initData(){
+    public void initData(){
         this.containerDelete.setValue(false);
         List<Cart> listCart_ = new ArrayList<Cart>();
         List<Integer> listChecked_ = new ArrayList<Integer>();
@@ -121,6 +121,13 @@ public class CartViewModel extends AndroidViewModel {
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         getApplication().startActivity(intent);
     }
+
+    @Override
+    protected void onCleared() {
+        super.onCleared();
+    Log.d("DEBUGCART", "onCleared: ");
+    }
+
     public void setListCart(MutableLiveData<List<Cart>> listCart) {
         this.listCart = listCart;
     }

@@ -136,11 +136,6 @@ public class DataRepository
         void getListCategory(List<Category> listCategory);
         void getListProduct(List<Product> listProduct);
     }
-
-    public void randomProduct(IListData iListData){
-        List<Product> listProduct = databaseProduct.getAllProduct();
-        iListData.getListProduct(listProduct);
-    }
 }
 
 

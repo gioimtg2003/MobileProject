@@ -56,8 +56,6 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                     }else {
                         cartViewModel.removeListChecked(position);
                     }
-
-
             }
         });
         holder.btnIncrease.setOnClickListener(new View.OnClickListener() {

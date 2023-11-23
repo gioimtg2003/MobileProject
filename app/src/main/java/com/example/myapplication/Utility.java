@@ -8,7 +8,7 @@ import java.util.TimeZone;
 public class Utility {
     public static String formatMoney(int price){
         DecimalFormat formatter = new DecimalFormat("#,###");
-        return formatter.format(price)  + " đ";
+        return formatter.format(price);
     }
     public static String formatDate(String date){
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
