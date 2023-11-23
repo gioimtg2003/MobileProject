@@ -187,10 +187,7 @@ public class DatabaseProduct extends SQLiteOpenHelper {
         if (checkCart(id)){
             String sql = "UPDATE cartProduct SET quantity = quantity + 1 WHERE idProduct = " + id;
             SQLiteDatabase db = getWritableDatabase();
-            Cursor cursor = db.rawQuery(sql, null);
-            cursor.moveToFirst();
-            Log.d("DEBUGCART", "ADD Cart SUCESS with ID : " + String.valueOf(cursor.getInt(0)));
-            cursor.close();
+            db.execSQL(sql);
             db.close();
         }else {
             SQLiteDatabase db = this.getWritableDatabase();

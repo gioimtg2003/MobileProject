@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Model.Product;
 import com.example.myapplication.R;
+import com.example.myapplication.Utility;
 import com.example.myapplication.View.DetailActivity;
 import com.example.myapplication.ViewModel.ProductViewModel;
 import com.squareup.picasso.Picasso;
@@ -61,6 +63,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             public void onClick(View v) {
                 if(product.getFavourite() == 1){
                     productViewModel.deleteFavouriteProduct(product.getId());
+                    Toast.makeText(v.getContext(), "Đã xóa khỏi danh sách yêu thích", Toast.LENGTH_SHORT).show();
                     // Nếu đang ở màn hình yêu thích thì cập nhật lại dữ liệu
                     if (favourite == 1)
                         productViewModel.fetchDataProductFavourite();
@@ -69,6 +72,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
 
                 }else{
                     productViewModel.addFavouriteProduct(product.getId());
+                    Toast.makeText(v.getContext(), "Đã thêm vào danh sách yêu thích", Toast.LENGTH_SHORT).show();
                     // Nếu đang ở màn hình yêu thích thì cập nhật lại dữ liệu
                     if (favourite == 1)
                         productViewModel.fetchDataProductFavourite();
@@ -78,7 +82,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             }
         });
         holder.tvName.setText(product.getName());
-        holder.tvPrice.setText(String.valueOf(product.getPrice()));
+        holder.tvPrice.setText(Utility.formatMoney(product.getPrice()) + " đ" );
         Picasso.get().load(product.getImageUrl()).into(holder.imgProduct);
         holder.imgProduct.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -93,6 +97,13 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
                 startActivity(v.getContext(), detail, null);
             }
         });
+        holder.btnAddCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                productViewModel.addCart(product.getId());
+                Toast.makeText(v.getContext(), "Đã thêm vào giỏ hàng", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
     @Override
     public int getItemCount() {
@@ -100,11 +111,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView favorite;
-        private ImageView imgProduct;
+        private ImageView favorite, imgProduct, btnAddCart;
         private TextView tvName;
         private TextView tvPrice;
         private CardView cardView;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imgProduct=itemView.findViewById(R.id.img_product);
@@ -112,6 +123,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
             tvPrice=itemView.findViewById(R.id.tv_price);
             favorite = itemView.findViewById(R.id.favourite);
             cardView = itemView.findViewById(R.id.card_product);
+            btnAddCart = itemView.findViewById(R.id.btnAddCart);
         }
     }
 }

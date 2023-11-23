@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.myapplication.R;
+import com.example.myapplication.Utility;
 import com.example.myapplication.ViewModel.DetailViewModel;
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.textfield.TextInputLayout;
@@ -70,7 +71,7 @@ public class DetailActivity extends AppCompatActivity {
     private void setDataFormIntentToView(){
         this.materialToolbar.setTitle(this.name);
         this.nameProduct.setText(this.name);
-        this.priceProduct.setText(String.valueOf(this.price));
+        this.priceProduct.setText(Utility.formatMoney(this.price) + " đ");
         this.descriptionDetail.setText(this.description);
         Picasso.get().load(this.imageUrl).into(this.imageView);
     }

@@ -34,7 +34,9 @@ public class ProductViewModel extends AndroidViewModel {
             }
         });
         thread.start();
-
+    }
+    public void addCart(int idProduct){
+        productRepository.addCart(idProduct);
     }
     public void fetchDataProductFavourite(){
         productRepository.fetchDataProductFavourite(new ProductRepository.IFetchDataCallBack() {

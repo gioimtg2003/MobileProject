@@ -1,6 +1,7 @@
 package com.example.myapplication.ViewModel;
 
 import android.app.Application;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -30,5 +31,6 @@ public class DetailViewModel extends AndroidViewModel {
 
     public void addCart(){
         detailRepository.addCart(this.idProduct.getValue());
+        Toast.makeText(getApplication().getApplicationContext(), "Thêm vào giỏ hàng thành công", Toast.LENGTH_SHORT).show();
     }
 }

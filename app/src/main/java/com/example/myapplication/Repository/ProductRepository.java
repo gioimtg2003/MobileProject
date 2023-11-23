@@ -27,6 +27,9 @@ public class ProductRepository {
     public void deleteFavouriteProduct(int idProduct){
         databaseProduct.DeleteFavouriteProduct(idProduct);
     }
+    public void addCart(int idProduct){
+        databaseProduct.addCart(idProduct);
+    }
     public interface IFetchDataCallBack{
         void onResponseGetData(List<Product> productList);
     }
