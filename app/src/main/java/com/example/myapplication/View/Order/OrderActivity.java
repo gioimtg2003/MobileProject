@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -30,11 +31,13 @@ public class OrderActivity extends AppCompatActivity {
     private Button btnOrder;
     private TextView txtTotalMoney, txtTotalMoney1 , txtTotalMoney0;
     private MaterialToolbar materialToolbar;
+    private String idUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order);
         initView();
+        getDataSharePreferences();
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         rcvOrderItem.setLayoutManager(linearLayoutManager);
         this.orderViewModel = new ViewModelProvider(this).get(OrderViewModel.class);
@@ -84,5 +87,16 @@ public class OrderActivity extends AppCompatActivity {
                 finish();
             }
         });
+        this.btnOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                orderViewModel.createOrder("hello", idUser);
+                finish();
+            }
+        });
+    }
+    private void getDataSharePreferences(){
+        SharedPreferences sharedPreferences = getSharedPreferences("APP_STORAGE", MODE_PRIVATE);
+        this.idUser = sharedPreferences.getString("id_user", "");
     }
 }

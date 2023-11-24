@@ -47,8 +47,6 @@ public class CartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        Log.d("DEBUGCART", "fragment OnCreateView: ");
         return inflater.inflate(R.layout.fragment_cart, container, false);
     }
 
@@ -65,13 +63,18 @@ public class CartFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        this.cartViewModel.initData();
+    }
+
+    @Override
     public void onDetach() {
         super.onDetach();
         ArrayList<Integer> listTemp = new ArrayList<Integer>();
         cartViewModel.getListChecked().setValue(listTemp);
         cartViewModel.getTotalMoney().setValue(0);
         cartViewModel.getContainerDelete().setValue(false);
-
     }
 
     private void initView(View view){

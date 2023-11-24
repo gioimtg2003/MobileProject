@@ -31,10 +31,16 @@ public class CartViewModel extends AndroidViewModel {
         this.containerDelete.setValue(false);
         List<Cart> listCart_ = new ArrayList<Cart>();
         List<Integer> listChecked_ = new ArrayList<Integer>();
-        this.listCart.setValue(listCart_);
         this.listChecked.setValue(listChecked_);
         this.totalMoney.setValue(0);
         this.listProductBuy.setValue(listCart_);
+        cartRepository.getAllCart(new CartRepository.GetDataSqlite() {
+            @Override
+            public void getData(List<Cart> cartList) {
+                listCart.setValue(cartList);
+                Log.d("DEBUGCART", "size giỏ hàng: " + String.valueOf(cartList.size()));
+            }
+        });
     }
 
     /**
@@ -51,12 +57,7 @@ public class CartViewModel extends AndroidViewModel {
     }
 
     public MutableLiveData<List<Cart>> getListCart() {
-        cartRepository.getAllCart(new CartRepository.GetDataSqlite() {
-            @Override
-            public void getData(List<Cart> cartList) {
-                listCart.postValue(cartList);
-            }
-        });
+
         return listCart;
     }
     public void addListChecked(int index){
