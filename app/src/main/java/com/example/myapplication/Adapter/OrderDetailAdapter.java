@@ -7,6 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.myapplication.Model.OrderDetail;
@@ -52,6 +53,10 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
         }
         holder.createDate.setText("Ngày tạo đơn: " + Utility.formatDate(orderDetail.getCreateDate()));
         holder.totalMoney.setText("Tổng tiền: " + Utility.formatMoney(orderDetail.getTotalPrice()) + " đ");
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(holder.rcvOrderDetailItems.getContext(), RecyclerView.VERTICAL, false);
+        holder.rcvOrderDetailItems.setLayoutManager(linearLayoutManager);
+        OrderDetailItemAdapter orderDetailItemAdapter = new OrderDetailItemAdapter(orderDetail.getOrderDetails());
+        holder.rcvOrderDetailItems.setAdapter(orderDetailItemAdapter);
 
     }
 
