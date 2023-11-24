@@ -1,9 +1,15 @@
-package com.example.myapplication.NetworkApi.OrderDetail;
-import  com.example.myapplication.Model.Product;
+package com.example.myapplication.Model;
+
 public class OrderDetailItem {
     private Product Product;
     private int Quantity;
     private int Price;
+
+    public OrderDetailItem(com.example.myapplication.Model.Product product, int quantity, int price) {
+        Product = product;
+        Quantity = quantity;
+        Price = price;
+    }
 
     public com.example.myapplication.Model.Product getProduct() {
         return Product;
@@ -26,12 +32,6 @@ public class OrderDetailItem {
     }
 
     public void setPrice(int price) {
-        Price = price;
-    }
-
-    public OrderDetailItem(com.example.myapplication.Model.Product product, int quantity, int price) {
-        Product = product;
-        Quantity = quantity;
         Price = price;
     }
 }

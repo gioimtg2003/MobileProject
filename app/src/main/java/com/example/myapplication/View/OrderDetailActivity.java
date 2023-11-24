@@ -16,10 +16,17 @@ public class OrderDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_detail);
         initView();
+        handleClick();
     }
 
     private void initView() {
         rcvOrderDetailItem = findViewById(R.id.rcvOrderDetailItem);
         toolbar = findViewById(R.id.toolbar);
+    }
+
+    private void handleClick() {
+        toolbar.setNavigationOnClickListener(v -> {
+            finish();
+        });
     }
 }

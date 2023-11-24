@@ -1,5 +1,7 @@
 package com.example.myapplication.NetworkApi.OrderDetail;
 
+import com.example.myapplication.Model.OrderDetail;
+
 import java.util.List;
 
 public class ResponseOrderDetail {

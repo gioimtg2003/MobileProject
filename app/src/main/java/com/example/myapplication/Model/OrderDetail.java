@@ -1,4 +1,4 @@
-package com.example.myapplication.NetworkApi.OrderDetail;
+package com.example.myapplication.Model;
 
 import java.util.List;
 
