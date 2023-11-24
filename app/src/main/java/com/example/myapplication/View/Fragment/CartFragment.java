@@ -63,9 +63,17 @@ public class CartFragment extends Fragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+        this.cartViewModel.initData();
+        Log.d("DEBUGCART", "fragment Start: ");
+    }
+
+    @Override
     public void onResume() {
         super.onResume();
         this.cartViewModel.initData();
+        Log.d("DEBUGCART", "fragment onResume: ");
     }
 
     @Override

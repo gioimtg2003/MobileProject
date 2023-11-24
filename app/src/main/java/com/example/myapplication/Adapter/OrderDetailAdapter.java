@@ -39,15 +39,15 @@ public class OrderDetailAdapter extends RecyclerView.Adapter<OrderDetailAdapter.
         String statusName = orderDetail.getStatusName();
         switch (statusName) {
             case "Pending":
-                holder.statusName.setText("Đang chờ xử lý");
+                holder.statusName.setText("Trạng thái: Đang chờ xử lý");
                 holder.btnHandle.setText("Hủy đơn hàng");
                 break;
             case "Delivering":
-                holder.statusName.setText("Đang giao hàng");
+                holder.statusName.setText("Trạng thái: Đang giao hàng");
                 holder.btnHandle.setText("Đang giao");
                 break;
             case "Delivered":
-                holder.statusName.setText("Đã giao hàng");
+                holder.statusName.setText("Trạng thái: Đã giao hàng");
                 holder.btnHandle.setText("Đánh giá");
                 break;
         }

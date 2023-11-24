@@ -9,12 +9,12 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.example.myapplication.R;
 import com.example.myapplication.View.Fragment.CartFragment;
 import com.example.myapplication.View.Fragment.FavouriteFagment;
 import com.example.myapplication.View.Fragment.HomeFragment;
+import com.example.myapplication.View.Fragment.ProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
                     ReplaceFragment(new HomeFragment());
                 } else if (i == R.id.favourite_fagment) {
                     ReplaceFragment(new FavouriteFagment());
+                } else if(i == R.id.profile){
+                    ReplaceFragment(new ProfileFragment());
                 }
                 return true;
             }

@@ -2,12 +2,12 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="12dp"
     android:orientation="vertical"
     android:padding="5dp">
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/statusName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Trạng thái: đang xử lý"
@@ -41,11 +41,15 @@
         android:layout_gravity="end"
         android:text="Tổng giá tiền: 110,000 đ" />
     <Button
-        android:id="@+id/btnCancelOrder"
+        android:id="@+id/btnHandle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@style/Widget.AppCompat.Button"
         android:layout_gravity="end"
         android:text="Hủy đơn hàng"/>
-
+    <View
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#F88C84" />
 </LinearLayout>

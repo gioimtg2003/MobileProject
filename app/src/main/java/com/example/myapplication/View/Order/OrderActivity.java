@@ -91,7 +91,7 @@ public class OrderActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 orderViewModel.createOrder("hello", idUser);
-                finish();
+                onBackPressed();
             }
         });
     }

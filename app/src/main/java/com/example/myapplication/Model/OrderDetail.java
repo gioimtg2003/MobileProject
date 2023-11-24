@@ -7,6 +7,23 @@ public class OrderDetail {
     private String statusName;
     private String createDate;
     private List<OrderDetailItem> orderDetails;
+    private int totalPrice;
+
+    public int getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(int totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public OrderDetail(String address, String statusName, String createDate, List<OrderDetailItem> orderDetails, int totalPrice) {
+        this.address = address;
+        this.statusName = statusName;
+        this.createDate = createDate;
+        this.orderDetails = orderDetails;
+        this.totalPrice = totalPrice;
+    }
 
     public OrderDetail(String address, String statusName, String createDate, List<OrderDetailItem> orderDetails) {
         this.address = address;
