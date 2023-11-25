@@ -44,8 +44,8 @@ public class OrderDetailViewModel extends ViewModel {
             @Override
             public void onSuccess(List<OrderDetail> orderDetails) {
                 List<OrderDetail> orderDetailList = new ArrayList<OrderDetail>();
-                int totalPrice = 0;
                 for (OrderDetail item : orderDetails) {
+                    int totalPrice = 0;
                     for (OrderDetailItem orderDetailItem : item.getOrderDetails()) {
                         totalPrice += orderDetailItem.getPrice() * orderDetailItem.getQuantity();
                     }
